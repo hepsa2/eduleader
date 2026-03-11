@@ -879,7 +879,7 @@ const CONFIG = {
   // 2. hCaptcha Site Key（在 https://www.hcaptcha.com/ 注册获取）
   //    同时替换上方 HTML 中 data-sitekey="YOUR_HCAPTCHA_SITE_KEY"
   HCAPTCHA_SITE_KEY: '0c54ed0a-27be-40a8-98fc-75e203564ab0',
-
+  WORKER_URL: 'https://raspy-wood-d062.sadnohikori-952.workers.dev/',
   REPO_OWNER: 'hepsa2',
   REPO_NAME:  'eduleader',
   ISSUE_LABEL: '投稿',
@@ -998,17 +998,12 @@ document.getElementById('reportForm').addEventListener('submit', async (e) => {
   btn.textContent = '提交中……';
 
   try {
-    const res = await fetch(API, {
+    const res = await fetch(CONFIG.WORKER_URL, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
-        'Content-Type': 'application/json',
-        'X-GitHub-Api-Version': '2022-11-28',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        title: issueTitle,
-        body: buildIssueBody(data),
-        labels: [CONFIG.ISSUE_LABEL],
+      title: issueTitle,
+      body: buildIssueBody(data),
       }),
     });
 
