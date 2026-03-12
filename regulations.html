@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>规章制度 · 教育守望</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:     #080b10;
+      --bg2:    #0e1219;
+      --bg3:    #151c26;
+      --border: #1e2a38;
+      --border2:#2a3848;
+      --red:    #c0392b;
+      --red2:   #e74c3c;
+      --gold:   #c9a84c;
+      --text:   #d6d0c4;
+      --text2:  #8a9aac;
+      --text3:  #4a5a6a;
+      --white:  #f0ebe0;
+      --green:  #27ae60;
+      --mono:   'JetBrains Mono', monospace;
+      --serif:  'Noto Serif SC', serif;
+      --sans:   'Noto Sans SC', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.6;
+    }
+
+    /* ── Nav bar ── */
+    .nav {
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky; top: 0;
+      background: rgba(8, 11, 16, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text2);
+      text-decoration: none;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      transition: color 0.2s;
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem;
+    }
+    .btn-back:hover { color: var(--white); border-color: var(--border2); }
+
+    .nav-title {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+    }
+    .nav-title span { color: var(--gold); }
+
+    /* ── Page header ── */
+    .page-header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 2rem;
+      position: relative; z-index: 5;
+    }
+    .page-header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--red);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+    .page-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8rem;
+    }
+    .page-desc {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      color: var(--text2);
+      max-width: 600px;
+      line-height: 1.9;
+    }
+
+    /* ── TOC ── */
+    .toc-strip {
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: relative; z-index: 5;
+    }
+    .toc-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+    }
+    .toc-item {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      color: var(--text3);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .toc-item:hover { color: var(--gold); }
+    .toc-item::before { content: '§ '; color: var(--border2); }
+
+    /* ── Content ── */
+    .content-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+      position: relative; z-index: 5;
+    }
+
+    /* Regulation block */
+    .reg-block {
+      margin-bottom: 4rem;
+    }
+
+    .reg-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .reg-icon {
+      width: 44px; height: 44px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .reg-header-text {}
+    .reg-category {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--red);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.3rem;
+    }
+    .reg-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+    }
+    .reg-meta {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--text3);
+      margin-top: 0.3rem;
+    }
+
+    /* Article items */
+    .article-item {
+      margin-bottom: 1.2rem;
+    }
+
+    .article-id {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      padding: 0.1rem 0.5rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .article-body {
+      font-family: var(--sans);
+      font-size: 0.87rem;
+      color: var(--text);
+      line-height: 2;
+      background: var(--bg2);
+      border-left: 2px solid var(--border2);
+      padding: 0.8rem 1.2rem;
+    }
+
+    .article-body strong { color: var(--red2); font-weight: 500; }
+    .article-body em { color: var(--gold); font-style: normal; }
+
+    .article-note {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--text3);
+      margin-top: 0.5rem;
+      padding-left: 0.5rem;
+      border-left: 2px solid var(--border);
+      line-height: 1.7;
+    }
+
+    /* Penalty table */
+    .penalty-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+    }
+    .penalty-table th {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      padding: 0.5rem 0.8rem;
+      color: var(--text2);
+      font-weight: 500;
+      text-align: left;
+      letter-spacing: 0.04em;
+    }
+    .penalty-table td {
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.8rem;
+      color: var(--text);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .penalty-table tr:hover td { background: var(--bg3); }
+    .penalty-table .severity-high { color: var(--red2); }
+    .penalty-table .severity-mid  { color: var(--gold); }
+    .penalty-table .severity-low  { color: var(--text2); }
+
+    /* Tip box */
+    .tip-box {
+      background: rgba(39,174,96,0.07);
+      border: 1px solid rgba(39,174,96,0.2);
+      border-left: 3px solid var(--green);
+      padding: 1rem 1.2rem;
+      margin-top: 1.5rem;
+      font-family: var(--sans);
+      font-size: 0.83rem;
+      line-height: 1.9;
+      color: var(--text);
+    }
+    .tip-box strong { color: #4fc87a; }
+    .tip-box ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+    .tip-box li { margin-bottom: 0.3rem; }
+
+    .warn-box {
+      background: rgba(192,57,43,0.07);
+      border: 1px solid rgba(192,57,43,0.2);
+      border-left: 3px solid var(--red);
+      padding: 1rem 1.2rem;
+      margin-top: 1.5rem;
+      font-family: var(--sans);
+      font-size: 0.83rem;
+      line-height: 1.9;
+      color: var(--text);
+    }
+
+    /* Hotline list */
+    .hotline-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .hotline-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1rem 1.2rem;
+    }
+    .hotline-region {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      color: var(--text2);
+      margin-bottom: 0.2rem;
+    }
+    .hotline-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .hotline-number {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--gold);
+    }
+
+    /* Section divider */
+    .sec-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border2), transparent);
+      margin: 3rem 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      position: relative; z-index: 5;
+    }
+    footer p {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--text3);
+      line-height: 2;
+    }
+
+    @media (max-width: 640px) {
+      .page-title { font-size: 1.5rem; }
+      .content-wrap { padding: 2rem 1rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="btn-back">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      返回投稿页
+    </a>
+    <div class="nav-title">教育守望 · <span>规章制度参考</span></div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="page-eyebrow">REGULATIONS · 规章制度</span>
+    <div class="page-title">教育政策与法律法规</div>
+    <p class="page-desc">
+      本页汇总与中学补课、学生作息相关的国家法规、教育部政策及各类规范文件，供同学和家长参考。内容为示例性摘录，请以官方发布的最新版本为准。
+    </p>
+  </div>
+</div>
+
+<div class="toc-strip">
+  <div class="toc-inner">
+    <a href="#shuangjian" class="toc-item">双减政策</a>
+    <a href="#zuoxi" class="toc-item">作息时间规定</a>
+    <a href="#buke" class="toc-item">课外补课规范</a>
+    <a href="#jiufa" class="toc-item">违规处罚依据</a>
+    <a href="#jubao" class="toc-item">投诉举报渠道</a>
+    <a href="#quanyi" class="toc-item">学生合法权益</a>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <!-- ══ 双减政策 ══ -->
+  <div class="reg-block" id="shuangjian">
+    <div class="reg-header">
+      <div class="reg-icon">📋</div>
+      <div class="reg-header-text">
+        <div class="reg-category">POLICY · 国家政策</div>
+        <div class="reg-name">《关于进一步减轻义务教育阶段学生作业负担和校外培训负担的意见》</div>
+        <div class="reg-meta">中共中央办公厅、国务院办公厅 · 2021年7月24日印发 · 俗称"双减政策"</div>
+      </div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">核心要求</div>
+      <div class="article-title">严格限制学科类校外培训</div>
+      <div class="article-body">
+        学科类培训机构一律不得占用<strong>国家法定节假日、休息日及寒暑假</strong>期间开展学科类培训。
+        不得开展面向学龄前儿童的线上培训，严禁以学前班、幼小衔接班、思维训练班等名义面向学龄前儿童开展线上学科类（含外语）培训。
+        现有学科类培训机构统一登记为<em>非营利性机构</em>。
+      </div>
+      <div class="article-note">注：本条规定适用于校外培训机构。学校内部若以"自愿申请"等名义在寒暑假/法定假期组织补课，同样违反相关规定。</div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">作业减负</div>
+      <div class="article-title">严控作业总量和时长</div>
+      <div class="article-body">
+        小学一、二年级不布置家庭书面作业，三至六年级书面作业平均完成时间不超过<strong>60分钟</strong>，
+        初中书面作业平均完成时间不超过<strong>90分钟</strong>。
+        坚决克服学生作业负担过重问题，将过多作业转移给家长完成的情况予以<strong>纠正</strong>。
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══ 作息时间 ══ -->
+  <div class="reg-block" id="zuoxi">
+    <div class="reg-header">
+      <div class="reg-icon">⏰</div>
+      <div class="reg-header-text">
+        <div class="reg-category">STANDARD · 规范标准</div>
+        <div class="reg-name">《义务教育学校管理标准》及相关作息规定</div>
+        <div class="reg-meta">教育部 · 2017年12月 · 2021年修订补充</div>
+      </div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">睡眠时间</div>
+      <div class="article-title">保障学生充足睡眠</div>
+      <div class="article-body">
+        教育部要求：小学生每天睡眠时间不少于 <strong>10小时</strong>，
+        初中生不少于 <strong>9小时</strong>，
+        高中生不少于 <strong>8小时</strong>。
+        学校不得要求学生<em>提前到校</em>参加统一的教育教学活动，不得占用午休时间进行教学。
+      </div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">到校时间</div>
+      <div class="article-title">严格限制早到校时间</div>
+      <div class="article-body">
+        小学上午上课时间不得早于 <strong>8:20</strong>，中学不得早于 <strong>8:00</strong>。
+        学校不得要求学生提前到校，不得占用节假日、双休日和寒暑假组织学生在校集体补课，
+        或为校外补课机构提供场地资源。
+      </div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">课时安排</div>
+      <div class="article-title">每日在校时间限制</div>
+      <div class="article-body">
+        义务教育阶段学校每周教学时间：小学不超过 <strong>26课时</strong>，初中不超过 <strong>30课时</strong>。
+        寄宿制学校要保证学生每天自由活动时间不少于 <strong>1小时</strong>。
+        严禁挤占体育、美育等非学科类课程课时。
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══ 补课规范 ══ -->
+  <div class="reg-block" id="buke">
+    <div class="reg-header">
+      <div class="reg-icon">🏫</div>
+      <div class="reg-header-text">
+        <div class="reg-category">PROHIBITION · 明令禁止</div>
+        <div class="reg-name">学校违规补课相关禁止性规定</div>
+        <div class="reg-meta">综合多部教育部令及省市级文件</div>
+      </div>
+    </div>
+
+    <table class="penalty-table">
+      <thead>
+        <tr>
+          <th>违规类型</th>
+          <th>适用阶段</th>
+          <th>违规程度</th>
+          <th>依据文件（示例）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>寒暑假强制或变相补课</td>
+          <td>义务教育 / 普通高中</td>
+          <td class="severity-high">严重违规</td>
+          <td>双减政策第十三条</td>
+        </tr>
+        <tr>
+          <td>占用周末安排补课</td>
+          <td>义务教育</td>
+          <td class="severity-high">严重违规</td>
+          <td>教育部令第41号</td>
+        </tr>
+        <tr>
+          <td>国庆/五一等法定节假日补课</td>
+          <td>全学段</td>
+          <td class="severity-high">严重违规</td>
+          <td>《劳动法》及教育部相关通知</td>
+        </tr>
+        <tr>
+          <td>晚自习期间组织授新课/考试</td>
+          <td>寄宿制中学</td>
+          <td class="severity-mid">违规</td>
+          <td>各省作息规范</td>
+        </tr>
+        <tr>
+          <td>早到校时间早于规定</td>
+          <td>全学段</td>
+          <td class="severity-mid">违规</td>
+          <td>教育部2021年通知</td>
+        </tr>
+        <tr>
+          <td>以自愿名义强制家长签字补课</td>
+          <td>全学段</td>
+          <td class="severity-high">变相强制，违规</td>
+          <td>各地整治补课通知</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box">
+      ⚠️ <strong>关于"自愿申请"套路：</strong>部分学校以"家长自愿申请""自愿补课协议"绕过监管。根据教育部明确表态，以任何名义在禁止时段组织补课，无论是否有签字，均属违规。此类申请书不具有免责效力。
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══ 违规处罚 ══ -->
+  <div class="reg-block" id="jiufa">
+    <div class="reg-header">
+      <div class="reg-icon">⚖️</div>
+      <div class="reg-header-text">
+        <div class="reg-category">PENALTY · 违规后果</div>
+        <div class="reg-name">违规补课的处理依据与可能后果</div>
+        <div class="reg-meta">《中华人民共和国教育法》《义务教育法》及各省教育局执行细则</div>
+      </div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">处理层级</div>
+      <div class="article-title">对学校及教师的处理方式</div>
+      <div class="article-body">
+        经查实的违规补课行为，可能面临以下处理：
+        <br><br>
+        · 教育主管部门<strong>责令整改</strong>，限期停止违规行为；<br>
+        · 对校长和直接责任人进行<strong>行政处分</strong>或诫勉谈话；<br>
+        · 违规学校<em>不得评优评先</em>，取消相关荣誉称号；<br>
+        · 情节严重者，对校长予以<strong>撤销职务</strong>处分；<br>
+        · 收费补课可能涉及<strong>乱收费</strong>，依法退款并罚款。
+      </div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">举报处理</div>
+      <div class="article-title">教育局处理投诉的程序</div>
+      <div class="article-body">
+        接到投诉后，县/区教育局应在 <strong>5个工作日</strong> 内进行核查，重大事项应<em>及时上报</em>并公开处理结果。
+        投诉人可要求知晓处理结果，如不满意可向上级教育行政部门申请复查或向纪检监察部门举报。
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══ 举报渠道 ══ -->
+  <div class="reg-block" id="jubao">
+    <div class="reg-header">
+      <div class="reg-icon">☎️</div>
+      <div class="reg-header-text">
+        <div class="reg-category">HOTLINE · 投诉渠道</div>
+        <div class="reg-name">全国及各地投诉举报渠道</div>
+        <div class="reg-meta">建议优先通过正规渠道举报，留存通话记录或书面凭证</div>
+      </div>
+    </div>
+
+    <div class="hotline-list">
+      <div class="hotline-card">
+        <div class="hotline-region">全国通用</div>
+        <div class="hotline-name">政务服务热线</div>
+        <div class="hotline-number">12345</div>
+      </div>
+      <div class="hotline-card">
+        <div class="hotline-region">全国通用</div>
+        <div class="hotline-name">教育部举报平台</div>
+        <div class="hotline-number">jubao.moe.gov.cn</div>
+      </div>
+      <div class="hotline-card">
+        <div class="hotline-region">示例 · 广东省</div>
+        <div class="hotline-name">广东省教育厅</div>
+        <div class="hotline-number">020-37628888</div>
+      </div>
+      <div class="hotline-card">
+        <div class="hotline-region">示例 · 北京市</div>
+        <div class="hotline-name">北京市教育委员会</div>
+        <div class="hotline-number">010-82837012</div>
+      </div>
+      <div class="hotline-card">
+        <div class="hotline-region">示例 · 上海市</div>
+        <div class="hotline-name">上海市教育委员会</div>
+        <div class="hotline-number">021-23111111</div>
+      </div>
+      <div class="hotline-card">
+        <div class="hotline-region">示例 · 江苏省</div>
+        <div class="hotline-name">江苏省教育厅</div>
+        <div class="hotline-number">025-83335921</div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <strong>📌 举报建议：</strong>
+      <ul>
+        <li>提前整理证据：补课通知（截图/纸质）、收费凭证、自愿申请书、课表等</li>
+        <li>记录时间、地点、参与人员规模等具体信息</li>
+        <li>优先通过 12345 热线，留存受理编号</li>
+        <li>若属于强制收费，同时可向当地市场监管局投诉</li>
+        <li>不满意处理结果可向省级教育厅投诉或申请行政复议</li>
+        <li>多人联署举报通常比单人更有效</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══ 学生权益 ══ -->
+  <div class="reg-block" id="quanyi">
+    <div class="reg-header">
+      <div class="reg-icon">🛡️</div>
+      <div class="reg-header-text">
+        <div class="reg-category">RIGHTS · 学生权益</div>
+        <div class="reg-name">《中华人民共和国未成年人保护法》相关条款</div>
+        <div class="reg-meta">第十次修订版 · 2021年6月1日施行</div>
+      </div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">第三十三条</div>
+      <div class="article-title">保障休息权利</div>
+      <div class="article-body">
+        学校应当与家长密切配合，根据未成年学生身心发展特点，对其进行生活指导，保障未成年学生<strong>休息、娱乐和体育锻炼的时间</strong>。
+        不得以任何理由占用未成年学生依法享有的休息时间。
+      </div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">第三十五条</div>
+      <div class="article-title">禁止体罚和变相体罚</div>
+      <div class="article-body">
+        学校、幼儿园的教职工应当尊重未成年人人格尊严，<strong>不得对未成年人实施体罚、变相体罚或者其他侮辱人格尊严的行为</strong>。
+        违反本条规定的，由主管部门责令改正；情节严重的，相关主管部门可以依法吊销其相应许可证件。
+      </div>
+    </div>
+
+    <div class="article-item">
+      <div class="article-id">第三十九条</div>
+      <div class="article-title">学生申诉权利</div>
+      <div class="article-body">
+        未成年学生对学校给予的<em>纪律处分</em>等措施不服的，可以依照相关规定提出申诉；
+        学校应当依照相关规定建立申诉制度，及时处理未成年学生的申诉，并将处理结果告知申诉人。
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <strong>💡 温馨提示：</strong>
+      本页内容为示例性摘录，法规条文以官方正式文本为准，请以中国人大网（npc.gov.cn）、教育部网站（moe.gov.cn）发布的版本核实。
+      您可以将此页面提供的规定告知学校，或作为投诉举报时的依据参考。
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>本页内容由项目维护者整理，仅供参考 · 如发现错误或需补充，欢迎在
+    <a href="https://github.com/hepsa2/eduleader/issues" target="_blank" style="color: var(--text3)">GitHub Issues</a>
+    提交反馈
+  </p>
+</footer>
+
+</body>
+</html>
