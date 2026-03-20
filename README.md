@@ -33,8 +33,10 @@ Have withstood pain to create many weapons.<br>
 曾承受痛苦创造诸多武器<br>
 Yet, those hands will never hold anything.<然而，留下的只有虚无<br>
 So as I pray, Unlimited Blade Works.<br>
-故如我祈求，无限之剑制<br>
-
+故如我祈求，无限之剑制<br><br>
+🏹第二步：准备好下列资源<br>
+1. 谷歌浏览器（Edge也可以，不要百度这种）
+2. 匿名邮箱用来注册github和cloudflare,推荐使用cock.li
 
 浏览器<br>
    │<br>
