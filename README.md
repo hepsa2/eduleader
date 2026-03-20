@@ -14,7 +14,7 @@
 因为内容敏感，本站容易被DNS污染（被防火墙针对）<br>
 我们欢迎大家创建不同的镜像站点，薪火相传<br><br>
 ## 无限剑制😡👊创建镜像站
-
+![愈挫愈勇](https://raw.githubusercontent.com/hepsa2/eduleader/main/fl.jpg)
 
 
 
