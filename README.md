@@ -15,7 +15,25 @@
 我们欢迎大家创建不同的镜像站点，薪火相传<br><br>
 ## 无限剑制😡👊创建镜像站
 ![愈挫愈勇](https://raw.githubusercontent.com/hepsa2/eduleader/main/fl.jpg)
-
+镜像站相当于本站的备份，把本站架构、内容复制，可以通过另一个网址链接访问。<br>
+### 如何创建本站镜像？
+- 🏹第一步，咏唱无限剑制<br>
+I am the bone of my sword.<br>
+吾为剑所成之身<br>
+Steel is my body, and fire is my blood.<br>
+钢铁为身 而火焰为血<br>
+![永不言弃！](https://raw.githubusercontent.com/hepsa2/eduleader/main/fsp.jpg)
+I have created over a thousand blades.<br>
+手制之剑已达千余<br>
+Unknown to Death.<br>
+不为死所知<br>
+Nor known to Life.<br>
+亦不为生所知<br>
+Have withstood pain to create many weapons.<br>
+曾承受痛苦创造诸多武器<br>
+Yet, those hands will never hold anything.<然而，留下的只有虚无<br>
+So as I pray, Unlimited Blade Works.<br>
+故如我祈求，无限之剑制<br>
 
 
 浏览器<br>
