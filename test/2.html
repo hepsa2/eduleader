@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简化版测试</title>
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #b30000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+        }
+        .modal-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            min-width: 300px;
+            max-width: 500px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔍 简化版模态框测试</h1>
+
+    <div id="info" style="padding: 15px; background: #f0f0f0; margin: 20px 0; border-radius: 5px;">
+        等待操作...
+    </div>
+
+    <!-- ✅ 不再使用 onclick -->
+    <button id="btnLogin">显示登录框</button>
+    <button id="btnSignup">显示注册框</button>
+
+    <!-- 登录模态框 -->
+    <div id="loginModal" style="display: none;">
+        <div class="modal">
+            <div class="modal-box">
+                <h2>登录</h2>
+                <form id="loginForm">
+                    <input type="email" id="loginEmail" required placeholder="邮箱" />
+                    <input type="password" id="loginPassword" required placeholder="密码" />
+                    <button type="submit" style="width: 100%; margin-top: 10px;">登录</button>
+                    <button type="button" id="closeLoginBtn" style="width: 100%; margin-top: 10px; background: #666;">关闭</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册模态框 -->
+    <div id="signupModal" style="display: none;">
+        <div class="modal">
+            <div class="modal-box">
+                <h2>注册</h2>
+                <form id="signupForm">
+                    <input type="email" id="signupEmail" required placeholder="邮箱" />
+                    <input type="password" id="signupPassword" required placeholder="密码（至少6位）" minlength="6" />
+                    <input type="password" id="signupPasswordConfirm" required placeholder="确认密码" minlength="6" />
+                    <button type="submit" style="width: 100%; margin-top: 10px;">注册</button>
+                    <button type="button" id="closeSignupBtn" style="width: 100%; margin-top: 10px; background: #666;">关闭</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+    <script>
+        let supabase;
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // ✅ 初始化 Supabase
+            try {
+                if (!window.supabase) throw new Error('Supabase SDK 加载失败');
+
+                supabase = window.supabase.createClient(
+                    'https://dlzmdgbpvvsuvhkxxctr.supabase.co',
+                    '你的 anon key'
+                );
+
+                document.getElementById('info').innerHTML = '✅ Supabase 已就绪，可以测试登录/注册';
+
+            } catch (error) {
+                document.getElementById('info').innerHTML = '❌ 初始化失败: ' + error.message;
+                console.error(error);
+            }
+
+            // ✅ 绑定按钮事件
+            document.getElementById('btnLogin').addEventListener('click', showLogin);
+            document.getElementById('btnSignup').addEventListener('click', showSignup);
+
+            document.getElementById('closeLoginBtn').addEventListener('click', closeLogin);
+            document.getElementById('closeSignupBtn').addEventListener('click', closeSignup);
+
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('signupForm').addEventListener('submit', handleSignup);
+        });
+
+        function showLogin() {
+            document.getElementById('loginModal').style.display = 'block';
+            document.getElementById('info').innerHTML = '📝 登录框已打开';
+        }
+
+        function closeLogin() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('info').innerHTML = '✅ 登录框已关闭';
+        }
+
+        function showSignup() {
+            document.getElementById('signupModal').style.display = 'block';
+            document.getElementById('info').innerHTML = '📝 注册框已打开';
+        }
+
+        function closeSignup() {
+            document.getElementById('signupModal').style.display = 'none';
+            document.getElementById('info').innerHTML = '✅ 注册框已关闭';
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            document.getElementById('info').innerHTML = '⏳ 正在登录...';
+
+            try {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+
+                const { error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (error) {
+                    alert('登录失败: ' + error.message);
+                    document.getElementById('info').innerHTML = '❌ 登录失败';
+                } else {
+                    alert('登录成功！');
+                    document.getElementById('info').innerHTML = '✅ 登录成功';
+                    closeLogin();
+                }
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('info').innerHTML = '❌ 异常: ' + error.message;
+            }
+        }
+
+        async function handleSignup(e) {
+            e.preventDefault();
+            document.getElementById('info').innerHTML = '⏳ 正在注册...';
+
+            try {
+                const email = document.getElementById('signupEmail').value;
+                const password = document.getElementById('signupPassword').value;
+                const confirmPassword = document.getElementById('signupPasswordConfirm').value;
+
+                if (password !== confirmPassword) {
+                    alert('两次密码不一致');
+                    return;
+                }
+
+                const { error } = await supabase.auth.signUp({
+                    email,
+                    password
+                });
+
+                if (error) {
+                    alert('注册失败: ' + error.message);
+                    document.getElementById('info').innerHTML = '❌ 注册失败';
+                } else {
+                    alert('注册成功，请查收邮箱');
+                    document.getElementById('info').innerHTML = '✅ 注册成功';
+                    closeSignup();
+                }
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('info').innerHTML = '❌ 异常: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
