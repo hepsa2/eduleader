@@ -70,7 +70,32 @@ So as I pray, Unlimited Blade Works.<br>
 12. 再add一个，type可以选text,name是REPO_OWNER
 13. value写你的github账户名
 14. 再add,type还是text,name是REPO_NAME，value写你的仓库名
-15. 再add,text,name是ISSUE_LABEL，value写投稿，没错就是两个中文汉字<br><br>
+15. 再add,text,name是ISSUE_LABEL，value写投稿，没错就是两个中文汉字
+16.点击右下角deploy保存，回到worker面板的overview一栏，长按🌏xxxxx.xxxxxx.workers.dev，复制整个链接，先粘贴到记事本里，到时候用<br><br>
+
+第六步：github配置
+1. 登陆github来到你的仓库，点击index.html,点击下面一栏的三个点，选in place,编辑你的html代码
+2. 下滑找到配置区，第876行代码，把引号里的网址删掉，粘贴你的worker地址（末尾不要带/这个符号）
+3. 粘贴上你自己的站点密钥（不要写secret key！）
+4. 修改仓库所有者、仓库名成你自己的。下面那个参数是最大展示的投稿篇目，你可以写99,也可以写20，随意。
+5. 注意粘贴的内容要包在引号里面，不要没了引号！
+6. 接下来上滑，commit changes保存修改
+7. 点击右上角你的github账号
+8. 点settings,找到最下面developer settings，再点personal 设置里的fine-那个设置
+9. generate new token,token名字随便，下面一栏可以不写，下滑找到Repository access，选择Only select repositories，然后select下拉选择你的仓库
+10. Permissions那个框的右上角点+
+11. 勾选issues，再展开选read and write
+12. generate token提交即可，之后你会看到github给你一串字符，右边有一个复制按钮，点击复制，粘贴在记事本里<br><br>
+
+第七步：cloudflare新增环境变量
+1. 进入刚刚的worker设置面板，点设置，下拉，再add一个环境变量，type是secret,name是GITHUB_TOKEN
+2. value就粘贴上你记事本里的github_pat开头的一串
+3. 右下角deploy<br><br>
+
+你的镜像站网址就是：<br>
+https://你的github用户名.github.io/你的仓库名
+
+
 
 
 
@@ -78,7 +103,7 @@ So as I pray, Unlimited Blade Works.<br>
 
 
    
-
+## 网站架构
 浏览器<br>
    │<br>
 Cloudflare Worker<br>
