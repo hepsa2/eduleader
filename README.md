@@ -103,7 +103,21 @@ https://你的github用户名.github.io/你的仓库名<br>
 [点击选择private bin实例](https://privatebin.info/directory)<br>
 进入实例列表页面，点击任意蓝字，你会进入新页面，点菜单栏，设置一个长密码（你不能忘记），最好勾选阅后即焚，选择链接保存时间，推荐一个星期。<br>
 在框内粘贴你的镜像站地址，然后顺带也说一下如何安全分享站点提高存活度。<br>
+## 设置giscus评论系统
+1. github仓库启用discuss（设置里自行查找）
+2. 把[giscus](https://github.com/apps/giscus)安装到你的github仓库上。
+3. 访问[giscus](https://giscus.app/zh-CN)并填写：
+- 仓库：账号/仓库名（注意要带斜杠）
+- 页面 ↔️ discussions 映射：推荐选择 "pathname"
+- Discussion 分类：推荐选择 "Announcements"
+- 主题：选择适合你页面的深色主题
+4. 在regulations.html里编辑代码，找到末尾部分，把：<br><br>
 
+- data-repo
+- data-repo-id
+- data-category
+- data-category-id
+换成你的（你的id可以在giscus网页看到）
 ## 网站架构
 浏览器<br>
    │<br>
