@@ -615,7 +615,7 @@
     <div class="logo-block">
       <span class="logo-eyebrow">EDULEADER · 教育守望</span>
       <div class="logo-title">中学违规补课<span>情况记录</span></div>
-      <div class="logo-sub">民间公开数据收集 · GitHub Pages 静态展示 · 无服务器</div>
+      <div class="logo-sub">民间公开数据收集 · GitHub Pages 静态展示 · 安全中转</div>
     </div>
     <a href="regulations.html" class="btn-regs">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -801,7 +801,7 @@
           </div>
           <div class="field-hint">
             我们是互助项目，请您尽可能也帮助其他朋友们，为了大家共同出一份力！<br>
-            如果没有电话卡，也可以转发给您能联系到的其他人，谢谢配合！
+            如果没有电话卡,也可以转发给您能联系到的其他人，谢谢配合！
           </div>
           <textarea id="helped" name="helped" style="min-height: 60px;" placeholder="例：#3、#7 两篇投稿，已帮助拨打举报电话"></textarea>
         </div>
@@ -869,16 +869,16 @@
 
 <script>
 // ╔══════════════════════════════════════════════════╗
-// ║  配置区                                           ║
+// ║  配置区 - 修改 WORKER_API_URL 为你的 Worker 地址  ║
 // ╚══════════════════════════════════════════════════╝
 const CONFIG = {
-  // GitHub Fine-grained PAT（仅 Issues: Read & Write 权限）
-  // 注意：此 token 在前端可见，请确保该 token 仅授予此仓库的 Issues 写权限
-  GITHUB_TOKEN: '__TOKEN__',
-
+  // Cloudflare Worker API 地址（部署后替换）
+  WORKER_API_URL: 'https://your-worker.your-subdomain.workers.dev',
+  
   // hCaptcha Site Key
   HCAPTCHA_SITE_KEY: '0c54ed0a-27be-40a8-98fc-75e203564ab0',
 
+  // GitHub 仓库信息（用于前端展示）
   REPO_OWNER: 'hepsa2',
   REPO_NAME:  'eduleader',
   ISSUE_LABEL: '投稿',
@@ -887,8 +887,6 @@ const CONFIG = {
   PREVIEW_COUNT: 20,
 };
 // ══════════════════════════════════════════════════
-
-const API = `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/issues`;
 
 // ── Checkbox interaction ──
 document.querySelectorAll('#violations .checkbox-item').forEach(item => {
@@ -997,33 +995,30 @@ document.getElementById('reportForm').addEventListener('submit', async (e) => {
   btn.textContent = '提交中……';
 
   try {
-    // ── 直接调用 GitHub Issues API ──
-    const res = await fetch(API, {
+    // ── 调用 Cloudflare Worker API ──
+    const res = await fetch(`${CONFIG.WORKER_API_URL}/submit`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
-        'X-GitHub-Api-Version': '2022-11-28',
-        'Accept': 'application/vnd.github+json',
       },
       body: JSON.stringify({
         title: issueTitle,
-        body:  buildIssueBody(data),
-        labels: [CONFIG.ISSUE_LABEL],
+        body: buildIssueBody(data),
+        captchaToken: captchaResp,
       }),
     });
 
-    if (res.ok) {
-      const issue = await res.json();
-      showStatus('success', `✅ 投稿成功！您的记录编号为 #${issue.number}，已公开展示。感谢您的参与！`);
+    const result = await res.json();
+
+    if (res.ok && result.success) {
+      showStatus('success', `✅ 投稿成功！您的记录编号为 #${result.issueNumber}，已公开展示。感谢您的参与！`);
       document.getElementById('reportForm').reset();
       document.querySelectorAll('.checkbox-item').forEach(i => i.classList.remove('checked'));
       document.querySelectorAll('.radio-item').forEach(i => i.classList.remove('selected'));
       if (window.hcaptcha) hcaptcha.reset();
       setTimeout(loadSubmissions, 1500);
     } else {
-      const err = await res.json();
-      showStatus('error', `提交失败：${err.message || '请稍后重试'}（HTTP ${res.status}）`);
+      showStatus('error', `提交失败：${result.error || '请稍后重试'}`);
     }
   } catch (err) {
     showStatus('error', `网络错误：${err.message}`);
@@ -1142,19 +1137,15 @@ async function loadSubmissions() {
   expandBtn.classList.add('hidden');
 
   try {
-    const res = await fetch(
-      `${API}?labels=${encodeURIComponent(CONFIG.ISSUE_LABEL)}&state=open&per_page=100&sort=created&direction=desc`,
-      {
-        headers: {
-          'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
-          'X-GitHub-Api-Version': '2022-11-28',
-          'Accept': 'application/vnd.github+json',
-        }
-      }
-    );
-
+    // ── 调用 Worker API 获取投稿列表 ──
+    const res = await fetch(`${CONFIG.WORKER_API_URL}/issues`);
+    
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    allIssues = await res.json();
+    const result = await res.json();
+    
+    if (!result.success) throw new Error(result.error || '加载失败');
+    
+    allIssues = result.issues;
 
     subCount.innerHTML = `共 <span>${allIssues.length}</span> 篇投稿`;
 
@@ -1197,4 +1188,4 @@ function expandAll() {
 loadSubmissions();
 </script>
 </body>
-    </html>
+</html>
