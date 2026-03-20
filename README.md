@@ -96,6 +96,7 @@ So as I pray, Unlimited Blade Works.<br>
 https://你的github用户名.github.io/你的仓库名<br>
 
 不过github免费生成的站点在大陆并不稳定，你最好需要购买一个域名，之后github绑定。推荐匿名购买国外的域名。<br>
+[免费获得自定义域名](https://domain.digitalplat.org)
 
 ## 怎样提升网站存活时间
 不要直接把网址传播给其他人，可以选择外套即使焚毁链接。什么意思呢，就是你额外生成一个定时可以自动失效的链接，别人点击链接后才能看到你的镜像站地址。这种方式能够使你的站点免受低级爬虫抓取。<br>
