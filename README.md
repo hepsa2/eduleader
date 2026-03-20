@@ -113,6 +113,7 @@ GitHub API（用于生成Issues）<br>
 ## 联系我们
 你可以通过安全、匿名的社交平台（XMPP协议）联系我们<br>
 [什么是XMPP？怎么下载？](https://shiyiyue.codeberg.page/rev1/html/xmpp%E6%95%99%E5%AD%A6.html)
-备注：这个网页不是我们的，仅供参考<br>
+备注：这个网页不是我们的，仅供参考，另外不要在XMPP暴露任何个人信息，尤其是你的微信qq号与学校、举报内容<br>
 XMPP频道：<br>
-students@muc.5222.de<br>
+students@muc.5222.de<br><br>
+出于安全问题，我们暂时关闭了联络渠道，上面是我们推荐的交流群地址
