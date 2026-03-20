@@ -17,7 +17,7 @@
 ![愈挫愈勇](https://raw.githubusercontent.com/hepsa2/eduleader/main/fl.jpg)
 镜像站相当于本站的备份，把本站架构、内容复制，可以通过另一个网址链接访问。<br>
 ### 如何创建本站镜像？
-- 🏹第一步，咏唱无限剑制<br>
+🏹第一步，咏唱无限剑制<br>
 I am the bone of my sword.<br>
 吾为剑所成之身<br>
 Steel is my body, and fire is my blood.<br>
