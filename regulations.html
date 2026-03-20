@@ -6,8 +6,78 @@
   <title>规章制度 · 教育守望</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* Comments section */
+.comments-section {
+  max-width: 960px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 5;
+}
 
-  <style>
+.comments-inner {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 2rem;
+}
+
+.comments-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.comments-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.comments-category {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.3rem;
+}
+
+.comments-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+
+/* Giscus theme customization */
+.giscus {
+  width: 100%;
+}
+
+.giscus-frame {
+  border: none !important;
+}
+
+@media (max-width: 640px) {
+  .comments-section {
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .comments-inner {
+    padding: 1.5rem 1rem;
+  }
+}
+  
     :root {
       --bg:     #080b10;
       --bg2:    #0e1219;
@@ -684,7 +754,37 @@
   </div>
 
 </div>
+<!-- 在 </footer> 之前添加 -->
+<div class="comments-section">
+  <div class="comments-inner">
+    <div class="comments-header">
+      <div class="comments-icon">💬</div>
+      <div>
+        <div class="comments-category">COMMENTS · 评论讨论</div>
+        <div class="comments-title">参与讨论</div>
+      </div>
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+            data-repo="hepsa2/eduleader"
+            data-repo-id="R_kgDORkfjCQ"
+            data-category="Announcements"
+            data-category-id="DIC_kwDORkfjCc4C420Z"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="transparent_dark"
+            data-lang="zh-CN"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+</div>
 
+<footer>
 <footer>
   <p>本页内容由项目维护者整理，仅供参考 · 如发现错误或需补充，欢迎在
     <a href="https://github.com/hepsa2/eduleader/issues" target="_blank" style="color: var(--text3)">GitHub Issues</a>
