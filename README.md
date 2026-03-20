@@ -45,19 +45,36 @@ So as I pray, Unlimited Blade Works.<br>
 第三步：仓库基本设置<br>
 1. 登陆你的github账号，完成2fa验证（安卓手机下载Aegis,很方便能完成验证，其他设备问AI），点击[本页面](https://github.com/hepsa2/eduleader)的叉子图标（那个叉子是圆点尖端和把柄），fork（复制）本仓库。新的仓库名你可以写简短的英文。
 2. 上方more栏目，选择settings（仓库设置），找到并点击pages,然后再下拉
-3. 找到 Branch，在那一段文字下面点none按钮，选择main,再点击save
-
-  <br><br>
+3. 找到 Branch，在那一段文字下面点none按钮，选择main,再点击save<br><br>
 
 第四步：hcaptcha配置
 1. 谷歌浏览器访问[hcaptcha.com](https://www.hcaptcha.com)
 2. 注册账户，你会拿到secret key（ES开头的一长串）,把它复制到手机自带的记事本里
-3. 添加站点（最上方栏目里选站点），域名填写
+3. 添加站点（最上方栏目里选站点），域名填写：你的用户名.github.io
+4. 接下来你可以自己设置人机验证的难度，推荐选择始终挑战、困难。
+5. 然后点击保存，平台会生成站点密钥给你，你也和secret key保存在一起（手机本地的记事本里）
 
 
 第五步：cloudflare配置<br>
 1. 左上角菜单栏（三条横杠），找到compute,下拉后选workers&pages
-2. 
+2. 点击create application,选择start with helloworld
+3. 等待一段时间，不要着急乱点按钮。
+4. 你会来到cloudflare的worker设置面板。点击右上角三点，edit code,进入js编辑页面
+5. 然后浏览器开另外一个窗口页，进入你的github账号（直接github.com也行）
+6. 进入你的仓库（复制自eduleader的），点击cfworker.js这行字，然后再点下面一排的三个点，选copy
+7. 成功copy复制代码后，粘贴到cloudflare的js编辑页面，那个框里，注意要先提前把框里原来的代码全部删掉再粘贴。
+8. 粘贴完右下角蓝色按钮deploy点击保存。保存完回到设置面板，点击上面一栏的设置（向右滑动）
+9. 下滑找到Variables and Secrets，点击add
+10. type选择secret,Variable name填HCAPTCHA_SECRET
+11. Value填你记事本里存的secret key（ES开头的）
+12. 再add一个，type可以选text,name是REPO_OWNER
+13. value写你的github账户名
+14. 再add,type还是text,name是REPO_NAME，value写你的仓库名
+15. 再add,text,name是ISSUE_LABEL，value写投稿，没错就是两个中文汉字<br><br>
+
+
+
+
 
 
    
