@@ -110,3 +110,9 @@ https://你的github用户名.github.io/你的仓库名<br>
 Cloudflare Worker<br>
    │<br>
 GitHub API（用于生成Issues）<br>
+## 联系我们
+你可以通过安全、匿名的社交平台（XMPP协议）联系我们<br>
+[什么是XMPP？怎么下载？](https://shiyiyue.codeberg.page/rev1/html/xmpp%E6%95%99%E5%AD%A6.html)
+备注：这个网页不是我们的，仅供参考<br>
+XMPP频道：<br>
+students@muc.5222.de<br>
