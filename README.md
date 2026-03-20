@@ -39,7 +39,8 @@ So as I pray, Unlimited Blade Works.<br>
 1. 谷歌浏览器（Edge也可以，不要百度这种）
 2. 匿名邮箱用来注册github和cloudflare甚至claude（不错的国外AI）,推荐使用cock.li<br>
 3. 注意cock.li邮箱注册完，出于安全限制，你会被暂时禁止发送邮件。点击蓝字链接（解锁账户），然后下滑，点击解锁即可。
-4. 注册github、claudflare、claude（可选），注意github账户名要用简短的英文。<br>
+4. 注册github、claudflare、claude（可选），注意github账户名要用简短的英文。<br><br>
+
 第三步：复制仓库<br>
 1. 登陆你的github账号，完成2fa验证（安卓手机下载Aegis,很方便能完成验证，其他设备问AI），点击[本页面](https://github.com/hepsa2/eduleader)的叉子图标（那个叉子是圆点尖端和把柄），fork（复制）本仓库。新的仓库名你可以写简短的英文。
 2. 修改配置：点进index.html
