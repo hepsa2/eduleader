@@ -36,7 +36,7 @@ Yet, those hands will never hold anything.<然而，留下的只有虚无<br>
 So as I pray, Unlimited Blade Works.<br>
 故如我祈求，无限之剑制<br><br>
 🏹第二步：准备好下列资源<br>
-0. 科学上网
+0. 科学上网（除提速外不做其他用途）
 1. 谷歌浏览器（Edge也可以，不要百度这种）
 2. 匿名邮箱用来注册github和cloudflare甚至claude（不错的国外AI）,推荐使用cock.li<br>
 3. 注意cock.li邮箱注册完，出于安全限制，你会被暂时禁止发送邮件。点击蓝字链接（解锁账户），然后下滑，点击解锁即可。
