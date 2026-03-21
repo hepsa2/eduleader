@@ -742,7 +742,36 @@
   </div>
 
 </div>
+<!-- AI 聊天模块 -->
+<div id="ai-chat" style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h3>学生互助 AI 助手</h3>
+  <textarea id="ai-prompt" placeholder="请输入你的问题..." style="width:100%;height:80px;"></textarea>
+  <button id="ai-send" style="margin-top:5px;">发送</button>
+  <pre id="ai-response" style="background:#f8f8f8;padding:10px;margin-top:5px;"></pre>
+</div>
 
+<script>
+  const API_URL = "https://ai-proxy.up.railway.app/ai"; // 你的 Railway URL
+
+  document.getElementById("ai-send").onclick = async () => {
+    const prompt = document.getElementById("ai-prompt").value;
+    if(!prompt) return alert('请输入问题');
+    const responseEl = document.getElementById("ai-response");
+    responseEl.textContent = 'AI 正在思考中...';
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      responseEl.textContent = data.result;
+    } catch(err) {
+      responseEl.textContent = "调用失败：" + err.message;
+    }
+  };
+</script>
 <!-- 评论区 -->
 <div class="comments-section">
   <div class="comments-inner">
