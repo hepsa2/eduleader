@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>请重新加载</title>
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;
+background:#0a0a0f;
+color:#e8e8f0;
+}
+.container{
+max-width:1000px;
+margin:0 auto;
+padding:60px 20px;
+}
+header{text-align:center;margin-bottom:60px;}
+h1{
+font-size:2.8rem;
+background:linear-gradient(135deg,#d4374c,#d4af37);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.links{
+display:grid;
+grid-template-columns:1fr;
+gap:15px;
+}
+.card{
+background:#12121a;
+padding:20px;
+border-radius:10px;
+text-decoration:none;
+color:inherit;
+border:1px solid rgba(212,55,76,0.2);
+}
+.card:hover{
+transform:translateY(-3px);
+}
+
+/* 隐藏入口 */
+.secret{
+display:none;
+text-align:center;
+margin-top:40px;
+}
+.secret button{
+padding:10px 18px;
+border-radius:20px;
+border:1px solid rgba(212,175,55,0.4);
+background:rgba(212,175,55,0.1);
+color:#d4af37;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<h1>华夏导航</h1>
+<p>中华数字门户</p>
+</header>
+
+<div class="links">
+<a href="https://www.xinhuanet.com" class="card" target="_blank">新华网</a>
+<a href="https://www.cctv.com" class="card" target="_blank">央视网</a>
+<a href="https://www.12306.cn" class="card" target="_blank">12306</a>
+<a href="https://www.nmc.cn" class="card" target="_blank">中国天气</a>
+<a href="https://www.baidu.com" class="card" target="_blank">百度引擎</a>
+<a href="*" class="card" target="_blank">使来更新</a>
+<a href="*" class="card" target="_blank">暂用更新</a>
+<a href="*" class="card" target="_blank">暂未海新</a>
+<a href="*" class="card" target="_blank">暂未更外</a>
+<a href="*" class="card" target="_blank">暂未流新</a>
+<a href="*" class="card" target="_blank">暂懒更新</a>
+<a href="*" class="card" target="_blank">气未更新</a>
+</div>
+
+<div class="secret" id="secretBox">
+<button id="goBtn">博客页面</button>
+</div>
+
+</div>
+
+<script>
+/* ========= 行为 ========= */
+let human = false;
+['click','touchstart','mousemove','scroll'].forEach(e=>{
+    document.addEventListener(e,()=>human=true,{once:true});
+});
+
+/* ========= 触发 ========= */
+window.addEventListener('scroll',()=>{
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 5){
+        setTimeout(()=>{
+            if(human){
+                document.getElementById('secretBox').style.display='block';
+            }
+        },1200);
+    }
+});
+
+/* =========  ========= */
+const pool = [
+    ["s","p","s","2","1"],
+    ["k","3","j","f","9"],
+    ["a","8","d","2","x"],
+    ["m","2","p","9","q"]
+];
+
+/* =========  ========= */
+document.getElementById('goBtn').addEventListener('click',()=>{
+
+    setTimeout(()=>{
+
+        // 随机选择
+        const arr = pool[Math.floor(Math.random()*pool.length)];
+
+        
+        const path = arr.join("");
+
+        // 最终转
+        window.location.href = "/" + path;
+
+    },800);
+
+});
+</script>
+
+</body>
+</html>
