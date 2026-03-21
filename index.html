@@ -1,436 +1,129 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中华数字门户</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中华数字门户</title>
 
-        :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --red-primary: #d4374c;
-            --red-glow: #ff4757;
-            --gold-primary: #d4af37;
-            --gold-glow: #ffd700;
-            --text-primary: #e8e8f0;
-            --text-secondary: #a8a8b8;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;
+background:#0a0a0f;
+color:#e8e8f0;
+}
+.container{
+max-width:1000px;
+margin:0 auto;
+padding:60px 20px;
+}
+header{text-align:center;margin-bottom:60px;}
+h1{
+font-size:2.8rem;
+background:linear-gradient(135deg,#d4374c,#d4af37);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.links{
+display:grid;
+grid-template-columns:1fr;
+gap:15px;
+}
+.card{
+background:#12121a;
+padding:20px;
+border-radius:10px;
+text-decoration:none;
+color:inherit;
+border:1px solid rgba(212,55,76,0.2);
+}
+.card:hover{
+transform:translateY(-3px);
+}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* 动态背景 */
-        .bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(212, 55, 76, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.06) 0%, transparent 50%);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* 祥云装饰 */
-        .cloud-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.03;
-            background-image: 
-                radial-gradient(circle at 15% 25%, var(--red-primary) 2px, transparent 2px),
-                radial-gradient(circle at 85% 75%, var(--gold-primary) 2px, transparent 2px);
-            background-size: 100px 100px;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .container {
-            position: relative;
-            z-index: 10;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        /* 标题区域 */
-        header {
-            text-align: center;
-            margin-bottom: 80px;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        .main-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--red-primary), var(--gold-primary), var(--red-primary));
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 4s ease infinite, titleGlow 2s ease-in-out infinite;
-            letter-spacing: 0.05em;
-            position: relative;
-        }
-
-        .main-title::before {
-            content: '龙';
-            position: absolute;
-            left: -60px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.4em;
-            opacity: 0.3;
-            color: var(--gold-primary);
-        }
-
-        .main-title::after {
-            content: '凤';
-            position: absolute;
-            right: -60px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.4em;
-            opacity: 0.3;
-            color: var(--red-primary);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.3em;
-            margin-bottom: 10px;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .tagline {
-            font-size: 0.95rem;
-            color: var(--gold-primary);
-            opacity: 0.8;
-            font-style: italic;
-            animation: fadeIn 2s ease-out;
-        }
-
-        /* 链接卡片网格 */
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .link-card {
-            background: rgba(18, 18, 26, 0.6);
-            border: 1px solid rgba(212, 55, 76, 0.2);
-            border-radius: 16px;
-            padding: 32px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            animation: fadeInUp 0.8s ease-out backwards;
-            backdrop-filter: blur(10px);
-        }
-
-        .link-card:nth-child(1) { animation-delay: 0.1s; }
-        .link-card:nth-child(2) { animation-delay: 0.2s; }
-        .link-card:nth-child(3) { animation-delay: 0.3s; }
-        .link-card:nth-child(4) { animation-delay: 0.4s; }
-        .link-card:nth-child(5) { animation-delay: 0.5s; }
-        .link-card:nth-child(6) { animation-delay: 0.6s; }
-
-        .link-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 55, 76, 0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .link-card:hover::before {
-            left: 100%;
-        }
-
-        .link-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--red-glow);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 0 30px rgba(212, 55, 76, 0.3),
-                inset 0 0 20px rgba(212, 55, 76, 0.05);
-        }
-
-        .link-card::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--red-primary), var(--gold-primary), var(--red-primary));
-            border-radius: 16px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .link-card:hover::after {
-            opacity: 0.5;
-            animation: borderRotate 3s linear infinite;
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-            display: inline-block;
-            transition: transform 0.4s;
-        }
-
-        .link-card:hover .card-icon {
-            transform: scale(1.2) rotate(5deg);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-title::after {
-            content: '→';
-            font-size: 1.2rem;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s;
-            color: var(--red-primary);
-        }
-
-        .link-card:hover .card-title::after {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .card-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .card-tag {
-            display: inline-block;
-            margin-top: 16px;
-            padding: 6px 14px;
-            background: rgba(212, 175, 55, 0.15);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--gold-primary);
-            font-weight: 500;
-        }
-
-        /* 页脚 */
-        footer {
-            text-align: center;
-            margin-top: 100px;
-            padding: 40px 20px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(212, 55, 76, 0.1);
-            animation: fadeIn 2s ease-out;
-        }
-
-        footer p {
-            margin: 8px 0;
-        }
-
-        .footer-symbol {
-            color: var(--red-primary);
-            margin: 0 5px;
-        }
-
-        /* 动画 */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(212, 55, 76, 0.3)); }
-            50% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.4)); }
-        }
-
-        @keyframes borderRotate {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-
-        /* 响应式 */
-        @media (max-width: 768px) {
-            .main-title::before,
-            .main-title::after {
-                display: none;
-            }
-
-            .links-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .container {
-                padding: 40px 15px;
-            }
-
-            header {
-                margin-bottom: 50px;
-            }
-        }
-
-        /* 粒子效果画布 */
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-    </style>
+/* 隐藏入口 */
+.secret{
+display:none;
+text-align:center;
+margin-top:40px;
+}
+.secret button{
+padding:10px 18px;
+border-radius:20px;
+border:1px solid rgba(212,175,55,0.4);
+background:rgba(212,175,55,0.1);
+color:#d4af37;
+cursor:pointer;
+}
+</style>
 </head>
+
 <body>
-    <canvas id="particles" class="bg-canvas"></canvas>
-    <div class="bg-gradient"></div>
-    <div class="cloud-pattern"></div>
 
-    <div class="container">
-        <header>
-            <h1 class="main-title">华夏导航</h1>
-            <p class="subtitle">中华数字门户</p>
-            <p class="tagline">传承千年文明，拥抱数字未来</p>
-        </header>
+<div class="container">
 
-        <div class="links-grid">
-            
+<header>
+<h1>华夏导航</h1>
+<p>中华数字门户</p>
+</header>
 
-            <a href="https://www.xinhuanet.com" class="link-card" target="_blank" style="text-decoration: none;">
-                <div class="card-icon">📰</div>
-                <h3 class="card-title">新华网</h3>
-                <p class="card-description">
-                    新华通讯社主办的综合新闻信息服务门户网站，国家通讯社，提供权威、及时的新闻报道，传递中国声音，讲述中国故事。
-                </p>
-                <span class="card-tag">新闻资讯</span>
-            </a>
+<div class="links">
+<a href="https://www.xinhuanet.com" class="card" target="_blank">新华网</a>
+<a href="https://www.cctv.com" class="card" target="_blank">央视网</a>
+<a href="https://www.12306.cn" class="card" target="_blank">12306</a>
+<a href="https://www.nmc.cn" class="card" target="_blank">中国天气</a>
+</div>
 
-            <a href="https://www.cctv.com" class="link-card" target="_blank" style="text-decoration: none;">
-                <div class="card-icon">📺</div>
-                <h3 class="card-title">央视网</h3>
-                <p class="card-description">
-                    中国中央电视台官方网站，提供新闻、综艺、纪录片等丰富的视频内容，展现大国风采，记录时代变迁，传播主流价值观。
-                </p>
-                <span class="card-tag">视频媒体</span>
-            </a>
+<div class="secret" id="secretBox">
+<button id="goBtn">博客页面</button>
+</div>
 
-            <a href="https://www.12306.cn" class="link-card" target="_blank" style="text-decoration: none;">
-                <div class="card-icon">🚄</div>
-                <h3 class="card-title">中国铁路12306</h3>
-                <p class="card-description">
-                    中国铁路客户服务中心，提供高铁、动车、普速列车票务服务。连接祖国大江南北，见证中国速度，体验智慧出行。
-                </p>
-                <span class="card-tag">便民服务</span>
-            </a>
+</div>
 
-            <a href="https://www.china.com.cn" class="link-card" target="_blank" style="text-decoration: none;">
-                <div class="card-icon">🌏</div>
-                <h3 class="card-title">中国网</h3>
-                <p class="card-description">
-                    国务院新闻办领导的国家重点新闻网站，多语种对外传播平台，向世界介绍中国，展示真实、立体、全面的中国形象。
-                </p>
-                <span class="card-tag">对外传播</span>
-            </a>
+<script>
+/* ========= 行为检测 ========= */
+let human = false;
+['click','touchstart','mousemove','scroll'].forEach(e=>{
+    document.addEventListener(e,()=>human=true,{once:true});
+});
 
-            <a href="https://www.nmc.cn" class="link-card" target="_blank" style="text-decoration: none;">
-                <div class="card-icon">🌤️</div>
-                <h3 class="card-title">中国天气网</h3>
-                <p class="card-description">
-                    中国气象局官方气象服务网站，提供全国天气预报、气象预警、气候监测等服务，守护人民生命财产安全，服务国家发展大局。
-                </p>
-                <span class="card-tag">气象服务</span>
-            </a>
-        </div>
+/* ========= 滚动触发 ========= */
+window.addEventListener('scroll',()=>{
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 5){
+        setTimeout(()=>{
+            if(human){
+                document.getElementById('secretBox').style.display='block';
+            }
+        },1200);
+    }
+});
 
-        <footer>
-            <p>
-                <span class="footer-symbol">★</span>
-                凝聚中华力量，共筑复兴梦想
-                <span class="footer-symbol">★</span>
-            </p>
-            <p>不忘初心 · 牢记使命 · 砥砺前行</p>
-        </footer>
-    </div>
-    <div>
-    <footer>
-    <p>想了解其他内容，请在网址后添加xuesheng再进入</p>
-    </footer>
-    </div>
+/* ========= 多入口池 ========= */
+const pool = [
+    ["s","p","s","2","1"],
+    ["k","3","j","f","9"],
+    ["a","8","d","2","x"],
+    ["m","2","p","9","q"]
+];
+
+/* ========= 点击跳转 ========= */
+document.getElementById('goBtn').addEventListener('click',()=>{
+
+    setTimeout(()=>{
+
+        // 随机选一个入口
+        const arr = pool[Math.floor(Math.random()*pool.length)];
+
+        // 动态拼接
+        const path = arr.join("");
+
+        // 最终跳转
+        window.location.href = "/" + path;
+
+    },800);
+
+});
+</script>
+
 </body>
 </html>
