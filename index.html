@@ -72,14 +72,14 @@ cursor:pointer;
 <a href="https://www.cctv.com" class="card" target="_blank">央视网</a>
 <a href="https://www.12306.cn" class="card" target="_blank">12306</a>
 <a href="https://www.nmc.cn" class="card" target="_blank">中国天气</a>
-<a href="https://www.xinhuanet.com" class="card" target="_blank">新华网</a>
-<a href="https://www.cctv.com" class="card" target="_blank">央视网</a>
-<a href="https://www.12306.cn" class="card" target="_blank">12306</a>
-<a href="https://www.nmc.cn" class="card" target="_blank">中国天气</a>
-<a href="https://www.xinhuanet.com" class="card" target="_blank">新华网</a>
-<a href="https://www.cctv.com" class="card" target="_blank">央视网</a>
-<a href="https://www.12306.cn" class="card" target="_blank">12306</a>
-<a href="https://www.nmc.cn" class="card" target="_blank">中国天气</a>
+<a href="https://www.baidu.com" class="card" target="_blank">百度引擎</a>
+<a href="*" class="card" target="_blank">暂未更新</a>
+<a href="*" class="card" target="_blank">暂未更新</a>
+<a href="*" class="card" target="_blank">暂未更新</a>
+<a href="*" class="card" target="_blank">暂未更新</a>
+<a href="*" class="card" target="_blank">暂未更新</a>
+<a href="*" class="card" target="_blank">暂未更新</a>
+<a href="*" class="card" target="_blank">暂未更新</a>
 </div>
 
 <div class="secret" id="secretBox">
@@ -89,13 +89,13 @@ cursor:pointer;
 </div>
 
 <script>
-/* ========= 行为检测 ========= */
+/* ========= 行为 ========= */
 let human = false;
 ['click','touchstart','mousemove','scroll'].forEach(e=>{
     document.addEventListener(e,()=>human=true,{once:true});
 });
 
-/* ========= 滚动触发 ========= */
+/* ========= 触发 ========= */
 window.addEventListener('scroll',()=>{
     if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 5){
         setTimeout(()=>{
@@ -106,7 +106,7 @@ window.addEventListener('scroll',()=>{
     }
 });
 
-/* ========= 多入口池 ========= */
+/* =========  ========= */
 const pool = [
     ["s","p","s","2","1"],
     ["k","3","j","f","9"],
@@ -114,18 +114,18 @@ const pool = [
     ["m","2","p","9","q"]
 ];
 
-/* ========= 点击跳转 ========= */
+/* =========  ========= */
 document.getElementById('goBtn').addEventListener('click',()=>{
 
     setTimeout(()=>{
 
-        // 随机选一个入口
+        // 随机选择
         const arr = pool[Math.floor(Math.random()*pool.length)];
 
-        // 动态拼接
+        
         const path = arr.join("");
 
-        // 最终跳转
+        // 最终转
         window.location.href = "/" + path;
 
     },800);
