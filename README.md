@@ -98,8 +98,8 @@ So as I pray, Unlimited Blade Works.<br>
 https://你的github用户名.github.io/你的仓库名<br>
 
 不过github免费生成的站点在大陆并不稳定，你最好需要购买一个域名，之后github绑定。推荐匿名购买国外的域名。<br>
-[免费获得二级域名](https://domain.digitalplat.org)
-这个免费平台支持修改ns,可用cloudflare代理（更抗封锁），cloudflare主页点击添加该域名后，在digitalplat平台域名面板修改ns1和ns2成cloudflare提供的两个，添加CNAME记录，name填@值写github名.github.io,再在github pages设置里保存自定义域名，之后在cloudflare的pages添加第二个CNAME记录，name和值照旧，点击保存，之后等待github的pages颁发证书，在https旁边方框内打✅即可。<br><br>
+[免费获得二级域名](https://domain.digitalplat.org)<br>
+这个免费平台支持修改ns,可用cloudflare代理（更抗封锁），cloudflare主页点击添加你的新自定义域名后，在digitalplat平台域名面板修改ns1和ns2成cloudflare提供的两个，添加CNAME记录，name填@值写github名.github.io,再在github pages设置里保存自定义域名，之后在cloudflare的pages添加第二个CNAME记录，name和值照旧，点击保存，之后等待github的pages颁发证书，在https旁边方框内打✅即可。之后你只要搜索xxx.xxxx.xx就可以跳转到你的网站（示例）<br><br>
 其他匿名可用的免费二级域名平台：
 - [dynv6](https://dynv6.com)
 - [infinityfree](https://www.infinityfree.com)
