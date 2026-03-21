@@ -5,5 +5,5 @@
 我们推荐做多域名绑定同一个github的pages架构<br><br>
 如下：<br><br>
 <strong>用户 → 2~3个备用域名 → Cloudflare CNAME → 主域名 → GitHub Pages</strong><br><br>
-
-aa
+在这之前，你仍旧需要先绑定主域名（自定义）到github的pages
+## 免费绑定教程
