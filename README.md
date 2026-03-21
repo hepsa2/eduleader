@@ -80,12 +80,14 @@ So as I pray, Unlimited Blade Works.<br>
 4. 修改仓库所有者、仓库名成你自己的。下面那个参数是最大展示的投稿篇目，你可以写99,也可以写20，随意。
 5. 注意粘贴的内容要包在引号里面，不要没了引号！
 6. 接下来上滑，commit changes保存修改
-7. 点击右上角你的github账号
-8. 点settings,找到最下面developer settings，再点personal 设置里的fine-那个设置
-9. generate new token,token名字随便，下面一栏可以不写，下滑找到Repository access，选择Only select repositories，然后select下拉选择你的仓库
-10. Permissions那个框的右上角点+
-11. 勾选issues，再展开选read and write
-12. generate token提交即可，之后你会看到github给你一串字符，右边有一个复制按钮，点击复制，粘贴在记事本里<br><br>
+7. 找到并进入仓库页面上面栏目的issues（或者可以在more→settings看到）
+8. 点labels,添加新的三个标签new label,名字分别是投稿、发布、拒绝，颜色可以随你选，Description可留空，然后分别保存
+9. 点击右上角你的github账号
+10. 点settings,找到最下面developer settings，再点personal 设置里的fine-那个设置
+11. generate new token,token名字随便，下面一栏可以不写，下滑找到Repository access，选择Only select repositories，然后select下拉选择你的仓库
+12. Permissions那个框的右上角点+
+13. 勾选issues，再展开选read and write
+14. generate token提交即可，之后你会看到github给你一串字符，右边有一个复制按钮，点击复制，粘贴在记事本里<br><br>
 
 第七步：cloudflare新增环境变量
 1. 进入刚刚的worker设置面板，点设置，下拉，再add一个环境变量，type是secret,name是GITHUB_TOKEN
@@ -96,7 +98,7 @@ So as I pray, Unlimited Blade Works.<br>
 https://你的github用户名.github.io/你的仓库名<br>
 
 不过github免费生成的站点在大陆并不稳定，你最好需要购买一个域名，之后github绑定。推荐匿名购买国外的域名。<br>
-[免费获得自定义域名](https://domain.digitalplat.org)
+[免费获得二级域名](https://dynv6.com)
 
 ## 怎样提升网站存活时间
 不要直接把网址传播给其他人，可以选择外套即使焚毁链接。什么意思呢，就是你额外生成一个定时可以自动失效的链接，别人点击链接后才能看到你的镜像站地址。这种方式能够使你的站点免受低级爬虫抓取。<br>
