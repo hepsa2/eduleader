@@ -1,4 +1,6 @@
 # 学生依法维权互助
+[入口页](https://bin.outv.im/?d2c71938d40f4462#HCytgzfiw9HQtMPrTAGxwgSPZWSdZDeYWdGcjDLKj7Wd)<br>如需🗝，请阅读到最后
+
 ### 《中华人民共和国宪法》
 第33条：<br>
 **国家尊重和保障人权** <br>
@@ -141,3 +143,6 @@ GitHub API（用于生成Issues）<br>
 XMPP频道：<br>
 students@muc.5222.de<br><br>
 出于安全问题，我们暂时关闭了联络渠道，上面是我们推荐的交流群地址
+
+### 🔑
+lao1949p
