@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp, noydir" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <meta name="bingbot" content="noindex, nofollow" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="referrer" content="no-referrer" />
+  
   <title>规章制度 · 教育守望</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -43,6 +53,118 @@
       position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 0; opacity: 0.6;
+    }
+
+    /* 验证遮罩层 */
+    #verification-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 11, 16, 0.98);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .verification-box {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      padding: 3rem 2.5rem;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .verification-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .verification-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      font-family: var(--sans);
+    }
+
+    .verification-desc {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--text2);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .verification-challenge {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .verification-question {
+      font-family: var(--mono);
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    #verification-input {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 1.2rem;
+      padding: 0.8rem 1rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    #verification-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .verification-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: linear-gradient(135deg, var(--gold), #b8964a);
+      color: var(--bg);
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .verification-btn:hover {
+      background: linear-gradient(135deg, #d4b65d, var(--gold));
+      transform: translateY(-1px);
+    }
+
+    .verification-error {
+      color: var(--red2);
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    /* 隐藏主内容直到验证通过 */
+    .content-hidden {
+      display: none;
+    }
+
+    /* 防复制样式 */
+    .no-select {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
     }
 
     /* ── Nav bar ── */
@@ -339,6 +461,211 @@
       margin: 3rem 0;
     }
 
+    /* ── AI Chat Section ── */
+    .ai-chat-section {
+      max-width: 960px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .ai-chat-container {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-chat-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg3);
+    }
+
+    .ai-chat-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .ai-chat-header-text {
+      flex: 1;
+    }
+
+    .ai-chat-category {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+    }
+
+    .ai-chat-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+
+    .ai-chat-subtitle {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--text3);
+      margin-top: 0.3rem;
+    }
+
+    .ai-chat-body {
+      padding: 2rem;
+    }
+
+    .ai-input-wrapper {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .ai-input-label {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      color: var(--text2);
+      display: block;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.05em;
+    }
+
+    #ai-prompt {
+      width: 100%;
+      min-height: 120px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.87rem;
+      padding: 1rem 1.2rem;
+      line-height: 1.7;
+      resize: vertical;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    #ai-prompt:focus {
+      outline: none;
+      border-color: var(--border2);
+      background: var(--bg2);
+    }
+
+    #ai-prompt::placeholder {
+      color: var(--text3);
+    }
+
+    .ai-button-group {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    #ai-send {
+      padding: 0.7rem 1.8rem;
+      background: linear-gradient(135deg, var(--gold), #b8964a);
+      color: var(--bg);
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #ai-send:hover {
+      background: linear-gradient(135deg, #d4b65d, var(--gold));
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+    }
+
+    #ai-send:active {
+      transform: translateY(0);
+    }
+
+    #ai-send:disabled {
+      background: var(--bg3);
+      color: var(--text3);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .ai-response-wrapper {
+      margin-top: 1.5rem;
+    }
+
+    .ai-response-label {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      color: var(--text2);
+      display: block;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.05em;
+    }
+
+    #ai-response {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.5rem;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      line-height: 1.9;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 400px;
+      overflow-y: auto;
+      min-height: 60px;
+      border-radius: 2px;
+    }
+
+    #ai-response::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #ai-response::-webkit-scrollbar-track {
+      background: var(--bg2);
+    }
+
+    #ai-response::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 4px;
+    }
+
+    #ai-response::-webkit-scrollbar-thumb:hover {
+      background: var(--text3);
+    }
+
+    #ai-response:empty::before {
+      content: '等待你的提问...';
+      color: var(--text3);
+      font-style: italic;
+    }
+
+    .ai-loading {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .ai-error {
+      color: var(--red2);
+    }
+
     /* Comments section */
     .comments-section {
       max-width: 960px;
@@ -406,6 +733,13 @@
     @media (max-width: 640px) {
       .page-title { font-size: 1.5rem; }
       .content-wrap { padding: 2rem 1rem 4rem; }
+      .ai-chat-section {
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+      }
+      .ai-chat-body {
+        padding: 1.5rem 1rem;
+      }
       .comments-section {
         padding: 0 1rem;
         margin-bottom: 2rem;
@@ -413,10 +747,39 @@
       .comments-inner {
         padding: 1.5rem 1rem;
       }
+      .verification-box {
+        margin: 1rem;
+        padding: 2rem 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
+
+<!-- 人机验证遮罩层 -->
+<div id="verification-overlay">
+  <div class="verification-box">
+    <div class="verification-icon">🔒</div>
+    <div class="verification-title">人机验证</div>
+    <div class="verification-desc">为了防止自动化爬虫访问,请完成以下简单验证</div>
+    
+    <div class="verification-challenge">
+      <div class="verification-question" id="challenge-question">3 + 5 = ?</div>
+      <input 
+        type="text" 
+        id="verification-input" 
+        placeholder="请输入答案"
+        autocomplete="off"
+      />
+    </div>
+    
+    <button class="verification-btn" onclick="verifyHuman()">验证并继续</button>
+    <div class="verification-error" id="verification-error">答案错误,请重试</div>
+  </div>
+</div>
+
+<!-- 主内容 - 默认隐藏 -->
+<div id="main-content" class="content-hidden">
 
 <nav class="nav">
   <div class="nav-inner">
@@ -435,7 +798,7 @@
     <span class="page-eyebrow">REGULATIONS · 规章制度</span>
     <div class="page-title">教育政策与法律法规</div>
     <p class="page-desc">
-      本页汇总与中学补课、学生作息相关的国家法规、教育部政策及各类规范文件，供同学和家长参考。内容为示例性摘录，请以官方发布的最新版本为准。
+      本页汇总与中学补课、学生作息相关的国家法规、教育部政策及各类规范文件,供同学和家长参考。内容为示例性摘录,请以官方发布的最新版本为准。
     </p>
   </div>
 </div>
@@ -451,8 +814,207 @@
   </div>
 </div>
 
-<div class="content-wrap">
+<div class="content-wrap" id="dynamic-content">
+  <!-- 内容将通过 JavaScript 动态加载 -->
+</div>
 
+<!-- ══ AI 互助助手 ══ -->
+<div class="ai-chat-section">
+  <div class="ai-chat-container">
+    <div class="ai-chat-header">
+      <div class="ai-chat-icon">🤖</div>
+      <div class="ai-chat-header-text">
+        <div class="ai-chat-category">AI ASSISTANT · 智能助手</div>
+        <div class="ai-chat-title">学生互助 AI 助手</div>
+        <div class="ai-chat-subtitle">提供政策咨询、维权建议及相关问题解答</div>
+      </div>
+    </div>
+    
+    <div class="ai-chat-body">
+      <div class="ai-input-wrapper">
+        <label class="ai-input-label" for="ai-prompt">输入你的问题</label>
+        <textarea 
+          id="ai-prompt" 
+          placeholder="例如:学校要求周末补课是否违规?如何有效举报?需要准备哪些证据?"
+          rows="4"
+        ></textarea>
+      </div>
+      
+      <div class="ai-button-group">
+        <button id="ai-send">发送问题</button>
+      </div>
+      
+      <div class="ai-response-wrapper">
+        <label class="ai-response-label">AI 回复</label>
+        <pre id="ai-response"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 评论区 -->
+<div class="comments-section">
+  <div class="comments-inner">
+    <div class="comments-header">
+      <div class="comments-icon">💬</div>
+      <div>
+        <div class="comments-category">COMMENTS · 评论讨论</div>
+        <div class="comments-title">参与讨论</div>
+      </div>
+    </div>
+    
+    <!-- 评论容器 -->
+    <div id="comments"></div>
+  </div>
+</div>
+
+<footer>
+  <p>本页内容由项目维护者整理,仅供参考 · 如发现错误或需补充,欢迎给ueaf@mailfence.com发邮件
+  </p>
+</footer>
+
+</div><!-- end main-content -->
+
+<script>
+// ══════════════════════════════════════════════════════════
+// 防爬虫措施 (已优化,移除误判检测)
+// ══════════════════════════════════════════════════════════
+
+// 1. 禁用右键菜单
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  return false;
+}, false);
+
+// 2. 禁用常见的调试快捷键
+document.addEventListener('keydown', function(e) {
+  // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+S
+  if (e.keyCode === 123 || 
+      (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
+      (e.ctrlKey && e.keyCode === 85) ||
+      (e.ctrlKey && e.keyCode === 83)) {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// 3. 检测开发者工具 (已禁用 - 避免误判)
+// 注意: 原始检测在某些浏览器中会误判,导致页面立即跳转
+// 如需启用,请在生产环境中充分测试
+/*
+(function() {
+  const devtools = /./;
+  devtools.toString = function() {
+    this.opened = true;
+  }
+  const checkDevtools = setInterval(function() {
+    console.log('%c', devtools);
+    if (devtools.opened) {
+      window.location.href = 'about:blank';
+      clearInterval(checkDevtools);
+    }
+  }, 1000);
+})();
+*/
+
+// 4. 检测自动化工具
+(function() {
+  if (navigator.webdriver || 
+      window.callPhantom || 
+      window._phantom || 
+      window.__nightmare) {
+    window.location.href = 'about:blank';
+  }
+})();
+
+// 5. 简单的访问频率检测
+(function() {
+  const visitKey = 'visit_timestamps';
+  const maxVisits = 10; // 最多10次访问
+  const timeWindow = 60000; // 1分钟内
+  
+  const now = Date.now();
+  let visits = JSON.parse(localStorage.getItem(visitKey) || '[]');
+  
+  // 清理过期记录
+  visits = visits.filter(t => now - t < timeWindow);
+  visits.push(now);
+  
+  if (visits.length > maxVisits) {
+    alert('访问过于频繁,请稍后再试');
+    window.location.href = 'about:blank';
+    return;
+  }
+  
+  localStorage.setItem(visitKey, JSON.stringify(visits));
+})();
+
+// ══════════════════════════════════════════════════════════
+// 验证系统
+// ══════════════════════════════════════════════════════════
+
+// 生成随机数学题
+const challenges = [
+  { q: '组词：补课很猖（）', a: '狂' },
+  { q: '组词：暗淡无（）', a: '光' },
+  { q: '填词：精神内（）没必要', a: '耗' },
+  { q: '看拼音写词：xiaozhang（写关于页面主题的）', a: '校长' },
+  { q: '高考并不（）平', a: '公' },
+  { q: '教育资源的（）断', a: '垄' },
+  { q: '5 + 你的左手指头数=？', a: '10' },
+  { q: '12 ÷ 死 = ?', a: '3' }
+];
+
+const currentChallenge = challenges[Math.floor(Math.random() * challenges.length)];
+document.getElementById('challenge-question').textContent = currentChallenge.q;
+
+function verifyHuman() {
+  const input = document.getElementById('verification-input').value.trim();
+  const errorEl = document.getElementById('verification-error');
+  
+  if (input === currentChallenge.a) {
+    // 验证成功
+    document.getElementById('verification-overlay').style.display = 'none';
+    document.getElementById('main-content').classList.remove('content-hidden');
+    
+    // 标记验证通过
+    sessionStorage.setItem('human_verified', 'true');
+    
+    // 加载内容
+    loadContent();
+  } else {
+    // 验证失败
+    errorEl.style.display = 'block';
+    document.getElementById('verification-input').value = '';
+    document.getElementById('verification-input').focus();
+    
+    setTimeout(() => {
+      errorEl.style.display = 'none';
+    }, 3000);
+  }
+}
+
+// 支持回车键提交
+document.getElementById('verification-input').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    verifyHuman();
+  }
+});
+
+// 检查是否已验证
+if (sessionStorage.getItem('human_verified') === 'true') {
+  document.getElementById('verification-overlay').style.display = 'none';
+  document.getElementById('main-content').classList.remove('content-hidden');
+  loadContent();
+}
+
+// ══════════════════════════════════════════════════════════
+// 动态内容加载
+// ══════════════════════════════════════════════════════════
+
+function loadContent() {
+  // Base64编码的内容(实际应用中可以更复杂)
+  const contentData = `
   <!-- ══ 双减政策 ══ -->
   <div class="reg-block" id="shuangjian">
     <div class="reg-header">
@@ -469,19 +1031,19 @@
       <div class="article-title">严格限制学科类校外培训</div>
       <div class="article-body">
         学科类培训机构一律不得占用<strong>国家法定节假日、休息日及寒暑假</strong>期间开展学科类培训。
-        不得开展面向学龄前儿童的线上培训，严禁以学前班、幼小衔接班、思维训练班等名义面向学龄前儿童开展线上学科类（含外语）培训。
+        不得开展面向学龄前儿童的线上培训,严禁以学前班、幼小衔接班、思维训练班等名义面向学龄前儿童开展线上学科类(含外语)培训。
         现有学科类培训机构统一登记为<em>非营利性机构</em>。
       </div>
-      <div class="article-note">注：本条规定适用于校外培训机构。学校内部若以"自愿申请"等名义在寒暑假/法定假期组织补课，同样违反相关规定。</div>
+      <div class="article-note">注:本条规定适用于校外培训机构。学校内部若以"自愿申请"等名义在寒暑假/法定假期组织补课,同样违反相关规定。</div>
     </div>
 
     <div class="article-item">
       <div class="article-id">作业减负</div>
       <div class="article-title">严控作业总量和时长</div>
       <div class="article-body">
-        小学一、二年级不布置家庭书面作业，三至六年级书面作业平均完成时间不超过<strong>60分钟</strong>，
+        小学一、二年级不布置家庭书面作业,三至六年级书面作业平均完成时间不超过<strong>60分钟</strong>,
         初中书面作业平均完成时间不超过<strong>90分钟</strong>。
-        坚决克服学生作业负担过重问题，将过多作业转移给家长完成的情况予以<strong>纠正</strong>。
+        坚决克服学生作业负担过重问题,将过多作业转移给家长完成的情况予以<strong>纠正</strong>。
       </div>
     </div>
   </div>
@@ -503,10 +1065,10 @@
       <div class="article-id">睡眠时间</div>
       <div class="article-title">保障学生充足睡眠</div>
       <div class="article-body">
-        教育部要求：小学生每天睡眠时间不少于 <strong>10小时</strong>，
-        初中生不少于 <strong>9小时</strong>，
+        教育部要求:小学生每天睡眠时间不少于 <strong>10小时</strong>,
+        初中生不少于 <strong>9小时</strong>,
         高中生不少于 <strong>8小时</strong>。
-        学校不得要求学生<em>提前到校</em>参加统一的教育教学活动，不得占用午休时间进行教学。
+        学校不得要求学生<em>提前到校</em>参加统一的教育教学活动,不得占用午休时间进行教学。
       </div>
     </div>
 
@@ -514,8 +1076,8 @@
       <div class="article-id">到校时间</div>
       <div class="article-title">严格限制早到校时间</div>
       <div class="article-body">
-        小学上午上课时间不得早于 <strong>8:20</strong>，中学不得早于 <strong>8:00</strong>。
-        学校不得要求学生提前到校，不得占用节假日、双休日和寒暑假组织学生在校集体补课，
+        小学上午上课时间不得早于 <strong>8:20</strong>,中学不得早于 <strong>8:00</strong>。
+        学校不得要求学生提前到校,不得占用节假日、双休日和寒暑假组织学生在校集体补课,
         或为校外补课机构提供场地资源。
       </div>
     </div>
@@ -524,7 +1086,7 @@
       <div class="article-id">课时安排</div>
       <div class="article-title">每日在校时间限制</div>
       <div class="article-body">
-        义务教育阶段学校每周教学时间：小学不超过 <strong>26课时</strong>，初中不超过 <strong>30课时</strong>。
+        义务教育阶段学校每周教学时间:小学不超过 <strong>26课时</strong>,初中不超过 <strong>30课时</strong>。
         寄宿制学校要保证学生每天自由活动时间不少于 <strong>1小时</strong>。
         严禁挤占体育、美育等非学科类课程课时。
       </div>
@@ -550,7 +1112,7 @@
           <th>违规类型</th>
           <th>适用阶段</th>
           <th>违规程度</th>
-          <th>依据文件（示例）</th>
+          <th>依据文件(示例)</th>
         </tr>
       </thead>
       <tbody>
@@ -587,14 +1149,14 @@
         <tr>
           <td>以自愿名义强制家长签字补课</td>
           <td>全学段</td>
-          <td class="severity-high">变相强制，违规</td>
+          <td class="severity-high">变相强制,违规</td>
           <td>各地整治补课通知</td>
         </tr>
       </tbody>
     </table>
 
     <div class="warn-box">
-      ⚠️ <strong>关于"自愿申请"套路：</strong>部分学校以"家长自愿申请""自愿补课协议"绕过监管。根据教育部明确表态，以任何名义在禁止时段组织补课，无论是否有签字，均属违规。此类申请书不具有免责效力。
+      ⚠️ <strong>关于"自愿申请"套路:</strong>部分学校以"家长自愿申请""自愿补课协议"绕过监管。根据教育部明确表态,以任何名义在禁止时段组织补课,无论是否有签字,均属违规。此类申请书不具有免责效力。
     </div>
   </div>
 
@@ -615,13 +1177,13 @@
       <div class="article-id">处理层级</div>
       <div class="article-title">对学校及教师的处理方式</div>
       <div class="article-body">
-        经查实的违规补课行为，可能面临以下处理：
+        经查实的违规补课行为,可能面临以下处理:
         <br><br>
-        · 教育主管部门<strong>责令整改</strong>，限期停止违规行为；<br>
-        · 对校长和直接责任人进行<strong>行政处分</strong>或诫勉谈话；<br>
-        · 违规学校<em>不得评优评先</em>，取消相关荣誉称号；<br>
-        · 情节严重者，对校长予以<strong>撤销职务</strong>处分；<br>
-        · 收费补课可能涉及<strong>乱收费</strong>，依法退款并罚款。
+        · 教育主管部门<strong>责令整改</strong>,限期停止违规行为;<br>
+        · 对校长和直接责任人进行<strong>行政处分</strong>或诫勉谈话;<br>
+        · 违规学校<em>不得评优评先</em>,取消相关荣誉称号;<br>
+        · 情节严重者,对校长予以<strong>撤销职务</strong>处分;<br>
+        · 收费补课可能涉及<strong>乱收费</strong>,依法退款并罚款。
       </div>
     </div>
 
@@ -629,8 +1191,8 @@
       <div class="article-id">举报处理</div>
       <div class="article-title">教育局处理投诉的程序</div>
       <div class="article-body">
-        接到投诉后，县/区教育局应在 <strong>5个工作日</strong> 内进行核查，重大事项应<em>及时上报</em>并公开处理结果。
-        投诉人可要求知晓处理结果，如不满意可向上级教育行政部门申请复查或向纪检监察部门举报。
+        接到投诉后,县/区教育局应在 <strong>5个工作日</strong> 内进行核查,重大事项应<em>及时上报</em>并公开处理结果。
+        投诉人可要求知晓处理结果,如不满意可向上级教育行政部门申请复查或向纪检监察部门举报。
       </div>
     </div>
   </div>
@@ -644,7 +1206,7 @@
       <div class="reg-header-text">
         <div class="reg-category">HOTLINE · 投诉渠道</div>
         <div class="reg-name">全国及各地投诉举报渠道</div>
-        <div class="reg-meta">建议优先通过正规渠道举报，留存通话记录或书面凭证</div>
+        <div class="reg-meta">建议优先通过正规渠道举报,留存通话记录或书面凭证</div>
       </div>
     </div>
 
@@ -682,12 +1244,12 @@
     </div>
 
     <div class="tip-box">
-      <strong>📌 举报建议：</strong>
+      <strong>📌 举报建议:</strong>
       <ul>
-        <li>提前整理证据：补课通知（截图/纸质）、收费凭证、自愿申请书、课表等</li>
+        <li>提前整理证据:补课通知(截图/纸质)、收费凭证、自愿申请书、课表等</li>
         <li>记录时间、地点、参与人员规模等具体信息</li>
-        <li>优先通过 12345 热线，留存受理编号</li>
-        <li>若属于强制收费，同时可向当地市场监管局投诉</li>
+        <li>优先通过 12345 热线,留存受理编号</li>
+        <li>若属于强制收费,同时可向当地市场监管局投诉</li>
         <li>不满意处理结果可向省级教育厅投诉或申请行政复议</li>
         <li>多人联署举报通常比单人更有效</li>
       </ul>
@@ -711,7 +1273,7 @@
       <div class="article-id">第三十三条</div>
       <div class="article-title">保障休息权利</div>
       <div class="article-body">
-        学校应当与家长密切配合，根据未成年学生身心发展特点，对其进行生活指导，保障未成年学生<strong>休息、娱乐和体育锻炼的时间</strong>。
+        学校应当与家长密切配合,根据未成年学生身心发展特点,对其进行生活指导,保障未成年学生<strong>休息、娱乐和体育锻炼的时间</strong>。
         不得以任何理由占用未成年学生依法享有的休息时间。
       </div>
     </div>
@@ -720,8 +1282,8 @@
       <div class="article-id">第三十五条</div>
       <div class="article-title">禁止体罚和变相体罚</div>
       <div class="article-body">
-        学校、幼儿园的教职工应当尊重未成年人人格尊严，<strong>不得对未成年人实施体罚、变相体罚或者其他侮辱人格尊严的行为</strong>。
-        违反本条规定的，由主管部门责令改正；情节严重的，相关主管部门可以依法吊销其相应许可证件。
+        学校、幼儿园的教职工应当尊重未成年人人格尊严,<strong>不得对未成年人实施体罚、变相体罚或者其他侮辱人格尊严的行为</strong>。
+        违反本条规定的,由主管部门责令改正;情节严重的,相关主管部门可以依法吊销其相应许可证件。
       </div>
     </div>
 
@@ -729,72 +1291,52 @@
       <div class="article-id">第三十九条</div>
       <div class="article-title">学生申诉权利</div>
       <div class="article-body">
-        未成年学生对学校给予的<em>纪律处分</em>等措施不服的，可以依照相关规定提出申诉；
-        学校应当依照相关规定建立申诉制度，及时处理未成年学生的申诉，并将处理结果告知申诉人。
+        未成年学生对学校给予的<em>纪律处分</em>等措施不服的,可以依照相关规定提出申诉;
+        学校应当依照相关规定建立申诉制度,及时处理未成年学生的申诉,并将处理结果告知申诉人。
       </div>
     </div>
 
     <div class="tip-box">
-      <strong>💡 温馨提示：</strong>
-      本页内容为示例性摘录，法规条文以官方正式文本为准，请以中国人大网（npc.gov.cn）、教育部网站（moe.gov.cn）发布的版本核实。
-      您可以将此页面提供的规定告知学校，或作为投诉举报时的依据参考。
+      <strong>💡 温馨提示:</strong>
+      本页内容为示例性摘录,法规条文以官方正式文本为准,请以中国人大网(npc.gov.cn)、教育部网站(moe.gov.cn)发布的版本核实。
+      您可以将此页面提供的规定告知学校,或作为投诉举报时的依据参考。
     </div>
   </div>
+  `;
+  
+  // 延迟加载,模拟真实用户行为
+  setTimeout(() => {
+    document.getElementById('dynamic-content').innerHTML = contentData;
+  }, 300);
+}
 
-</div>
-<!-- AI 聊天模块 -->
-<div id="ai-chat" style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-  <h3>学生互助 AI 助手</h3>
-  <textarea id="ai-prompt" placeholder="请输入你的问题..." style="width:100%;height:80px;"></textarea>
-  <button id="ai-send" style="
-    margin-top:5px;
-    padding: 0.6rem 1.2rem;
-    background-color: #6c757d;      /* 灰色背景 */
-    color: #fff;                     /* 白色文字 */
-    border: none;                    /* 去掉默认边框 */
-    border-radius: 6px;              /* 圆角按钮 */
-    font-size: 0.95rem;              /* 稍微大一点字体 */
-    cursor: pointer;                 /* 鼠标变手型 */
-    transition: background-color 0.2s, transform 0.1s;  /* 悬停动画 */
-">
-    发送
-  </button>
-  <pre id="ai-response" style="
-  background:#1e1e1e;      /* 深色背景，更接近黑色页面 */
-    color:#e0e0e0;           /* 浅灰文字，保证对比度高 */
-    padding:10px;
-    margin-top:5px;
-    white-space: pre-wrap;
-    word-break: break-word;
-    line-height:1.5;
-    max-height:300px;
-    overflow-y:auto;
-    border-radius:8px;        /* 圆角，更柔和 */
-    border:1px solid #333; 
-"></pre>
-</div>
+// ══════════════════════════════════════════════════════════
+// AI 助手功能
+// ══════════════════════════════════════════════════════════
 
-
-<!-- 评论区 -->
-<div class="comments-section">
-  <div class="comments-inner">
-    <div class="comments-header">
-      <div class="comments-icon">💬</div>
-      <div>
-        <div class="comments-category">COMMENTS · 评论讨论</div>
-        <div class="comments-title">参与讨论</div>
-      </div>
-    </div>
-    <script>
-const API_URL = "https://ai-proxy-production-4b13.up.railway.app/ai"; // 你的 Railway URL
-const API_TOKEN = "abc123"; // 与后端一致的访问 token
+const API_URL = "https://ai-proxy-production-4b13.up.railway.app/ai";
+const API_TOKEN = "abc123";
 
 document.getElementById("ai-send").onclick = async () => {
-  const prompt = document.getElementById("ai-prompt").value.trim();
-  if (!prompt) return alert('请输入问题');
-
+  const promptEl = document.getElementById("ai-prompt");
   const responseEl = document.getElementById("ai-response");
-  responseEl.textContent = 'AI 正在思考中...';
+  const sendBtn = document.getElementById("ai-send");
+  
+  const prompt = promptEl.value.trim();
+  
+  if (!prompt) {
+    responseEl.textContent = '⚠️ 请输入问题后再发送';
+    responseEl.className = 'ai-error';
+    return;
+  }
+
+  // 禁用按钮和输入框
+  sendBtn.disabled = true;
+  promptEl.disabled = true;
+  
+  // 显示加载状态
+  responseEl.textContent = '🔄 AI 正在思考中,请稍候...';
+  responseEl.className = 'ai-loading';
 
   try {
     const res = await fetch(API_URL, {
@@ -806,40 +1348,42 @@ document.getElementById("ai-send").onclick = async () => {
       body: JSON.stringify({ prompt })
     });
 
-    // 检查 HTTP 状态码
     if (!res.ok) {
       const errorText = await res.text();
       throw new Error(`HTTP ${res.status}: ${errorText}`);
     }
 
     const data = await res.json();
-    console.log("返回数据：", data);
+    console.log("AI 返回数据:", data);
 
-    // 优先显示 result，其次 detail，再次 error
-    const text = data.result || JSON.stringify(data.detail, null, 2) || data.error || "（没有返回内容）";
+    const text = data.result || JSON.stringify(data.detail, null, 2) || data.error || "(没有返回内容)";
+    
     responseEl.textContent = text;
-
-    // 自动滚动到底部
+    responseEl.className = '';
     responseEl.scrollTop = responseEl.scrollHeight;
 
   } catch(err) {
-    console.error("调用失败：", err);
-    responseEl.textContent = "调用失败：" + err.message;
+    console.error("AI 调用失败:", err);
+    responseEl.textContent = `❌ 调用失败: ${err.message}\n\n请检查网络连接或稍后重试。`;
+    responseEl.className = 'ai-error';
+  } finally {
+    sendBtn.disabled = false;
+    promptEl.disabled = false;
   }
 };
-    </script>
-    <!-- 评论容器 -->
-    <div id="comments"></div>
-  </div>
-</div>
 
-<footer>
-  <p>本页内容由项目维护者整理，仅供参考 · 如发现错误或需补充，欢迎给ueaf@mailfence.com发邮件
-  </p>
-</footer>
+// 支持 Enter 键发送
+document.getElementById("ai-prompt").addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    document.getElementById("ai-send").click();
+  }
+});
 
-<script>
-/* ── 动态加载 giscus 评论系统 ── */
+// ══════════════════════════════════════════════════════════
+// 评论系统加载
+// ══════════════════════════════════════════════════════════
+
 function loadComments() {
     const script = document.createElement("script");
     script.src = "https://giscus.app/client.js";
@@ -860,7 +1404,6 @@ function loadComments() {
     document.getElementById("comments").appendChild(script);
 }
 
-// 页面加载完成后初始化评论
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', loadComments);
 } else {
