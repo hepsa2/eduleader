@@ -774,41 +774,7 @@
 "></pre>
 </div>
 
-<script>
-  const API_URL = "https://ai-proxy-production-4b13.up.railway.app/ai"; // 你的 Railway URL
 
-  document.getElementById("ai-send").onclick = async () => {
-    const prompt = document.getElementById("ai-prompt").value;
-    if(!prompt) return alert('请输入问题');
-    const responseEl = document.getElementById("ai-response");
-    responseEl.textContent = 'AI 正在思考中...';
-
-    try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer abc123"
-        },
-        body: JSON.stringify({ prompt })
-      });
-      const data = await res.json();
-      console.log("返回数据：", data);
-      const text =
-        data.result ||
-        JSON.stringify(data.detail, null, 2) ||
-        data.error ||
-        "（没有返回内容）";
-
-      responseEl.textContent = text;
-
-// 自动滚动到底部
-      responseEl.scrollTop = responseEl.scrollHeight;
-    } catch(err) {
-      responseEl.textContent = "调用失败：" + err.message;
-    }
-  };
-</script>
 <!-- 评论区 -->
 <div class="comments-section">
   <div class="comments-inner">
@@ -819,7 +785,49 @@
         <div class="comments-title">参与讨论</div>
       </div>
     </div>
-    
+    <script>
+const API_URL = "https://ai-proxy-production-4b13.up.railway.app/ai"; // 你的 Railway URL
+const API_TOKEN = "abc123"; // 与后端一致的访问 token
+
+document.getElementById("ai-send").onclick = async () => {
+  const prompt = document.getElementById("ai-prompt").value.trim();
+  if (!prompt) return alert('请输入问题');
+
+  const responseEl = document.getElementById("ai-response");
+  responseEl.textContent = 'AI 正在思考中...';
+
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_TOKEN}`
+      },
+      body: JSON.stringify({ prompt })
+    });
+
+    // 检查 HTTP 状态码
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`HTTP ${res.status}: ${errorText}`);
+    }
+
+    const data = await res.json();
+    console.log("返回数据：", data);
+
+    // 优先显示 result，其次 detail，再次 error
+    const text = data.result || JSON.stringify(data.detail, null, 2) || data.error || "（没有返回内容）";
+    responseEl.textContent = text;
+
+    // 自动滚动到底部
+    responseEl.scrollTop = responseEl.scrollHeight;
+
+  } catch(err) {
+    console.error("调用失败：", err);
+    responseEl.textContent = "调用失败：" + err.message;
+  }
+};
+    </script>
     <!-- 评论容器 -->
     <div id="comments"></div>
   </div>
