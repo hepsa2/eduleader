@@ -83,7 +83,7 @@ So as I pray, Unlimited Blade Works.<br>
 5. 注意粘贴的内容要包在引号里面，不要没了引号！
 6. 接下来上滑，commit changes保存修改
 7. 找到并进入仓库页面上面栏目的issues（或者可以在more→settings看到）
-8. 点labels,添加新的三个标签new label,名字分别是投稿、发布、拒绝，颜色可以随你选，Description可留空，然后分别保存
+8. 点labels,添加新的标签new label,名字是投稿，颜色可以随你选，Description可留空，然后保存
 9. 点击右上角你的github账号
 10. 点settings,找到最下面developer settings，再点personal 设置里的fine-那个设置
 11. generate new token,token名字随便，下面一栏可以不写，下滑找到Repository access，选择Only select repositories，然后select下拉选择你的仓库
