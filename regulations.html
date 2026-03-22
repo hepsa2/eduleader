@@ -767,7 +767,11 @@
       });
       const data = await res.json();
       console.log("返回数据：", data);
-      responseEl.textContent = data.result || data.error || "（没有返回内容）";
+      responseEl.textContent = 
+        data.result 
+        || JSON.stringify(data.detail, null, 2) 
+        || data.error 
+        || "（没有返回内容）";
     } catch(err) {
       responseEl.textContent = "调用失败：" + err.message;
     }
