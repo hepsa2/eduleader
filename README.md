@@ -131,6 +131,9 @@ dynv6填写值时注意最后额外加.不然会自动拼接
 Cloudflare Worker<br>
    │<br>
 GitHub API（用于生成Issues）<br>
+## 关于AI
+- 使用了轻量后端代理Railway的免费服务，使API key不在前端暴露
+- 添加了token限制和防刷策略。
 ## 联系我们
 你可以通过安全、匿名的社交平台（XMPP协议）联系我们<br>
 [什么是XMPP？怎么下载？](https://shiyiyue.codeberg.page/rev1/html/xmpp%E6%95%99%E5%AD%A6.html)
