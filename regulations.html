@@ -786,7 +786,10 @@
     try {
       const res = await fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer abc123"
+        },
         body: JSON.stringify({ prompt })
       });
       const data = await res.json();
