@@ -1,5 +1,5 @@
 # 学生依法维权互助
-[入口页](https://bin.outv.im/?d2c71938d40f4462#HCytgzfiw9HQtMPrTAGxwgSPZWSdZDeYWdGcjDLKj7Wd)<br>如需🗝，请阅读到最后
+[入口页](https://bin.outv.im/?d2c71938d40f4462#HCytgzfiw9HQtMPrTAGxwgSPZWSdZDeYWdGcjDLKj7Wd)<br>如需查看，请阅读到最后
 
 ### 《中华人民共和国宪法》
 第33条：<br>
