@@ -746,16 +746,31 @@
 <div id="ai-chat" style="border:1px solid #ccc; padding:10px; margin:10px 0;">
   <h3>学生互助 AI 助手</h3>
   <textarea id="ai-prompt" placeholder="请输入你的问题..." style="width:100%;height:80px;"></textarea>
-  <button id="ai-send" style="margin-top:5px;">发送</button>
+  <button id="ai-send" style="
+    margin-top:5px;
+    padding: 0.6rem 1.2rem;
+    background-color: #6c757d;      /* 灰色背景 */
+    color: #fff;                     /* 白色文字 */
+    border: none;                    /* 去掉默认边框 */
+    border-radius: 6px;              /* 圆角按钮 */
+    font-size: 0.95rem;              /* 稍微大一点字体 */
+    cursor: pointer;                 /* 鼠标变手型 */
+    transition: background-color 0.2s, transform 0.1s;  /* 悬停动画 */
+">
+    发送
+  </button>
   <pre id="ai-response" style="
-  background:#f8f8f8;
-  padding:10px;
-  margin-top:5px;
-  white-space: pre-wrap;
-  word-break: break-word;
-  line-height:1.5;
-  max-height:300px;
-  overflow-y:auto;
+  background:#1e1e1e;      /* 深色背景，更接近黑色页面 */
+    color:#e0e0e0;           /* 浅灰文字，保证对比度高 */
+    padding:10px;
+    margin-top:5px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height:1.5;
+    max-height:300px;
+    overflow-y:auto;
+    border-radius:8px;        /* 圆角，更柔和 */
+    border:1px solid #333; 
 "></pre>
 </div>
 
