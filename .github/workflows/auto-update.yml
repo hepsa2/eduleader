@@ -1,5 +1,4 @@
 name: Update redirect pages
-
 on:
   schedule:
     - cron: "0 */12 * * *"   # 每 12 小时运行一次
