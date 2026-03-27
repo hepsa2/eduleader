@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>薪火相传:中学违规情况记录</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
+  <style>
+    /* ===== CONFIG: Replace values in the JS section below ===== */
+    :root {
+      --bg:        #080b10;
+      --bg2:       #0e1219;
+      --bg3:       #151c26;
+      --border:    #1e2a38;
+      --border2:   #2a3848;
+      --red:       #c0392b;
+      --red2:      #e74c3c;
+      --gold:      #c9a84c;
+      --text:      #d6d0c4;
+      --text2:     #8a9aac;
+      --text3:     #4a5a6a;
+      --white:     #f0ebe0;
+      --mono:      'JetBrains Mono', monospace;
+      --serif:     'Noto Serif SC', serif;
+      --sans:      'Noto Sans SC', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── Noise overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.6;
+    }
+
+    /* ── Top strip ── */
+    .top-strip {
+      background: var(--red);
+      padding: 6px 0;
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.9);
+      position: relative; z-index: 10;
+    }
+
+    /* ── Header ── */
+    header {
+      position: relative; z-index: 10;
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 0 1.6rem;
+      gap: 1rem;
+    }
+
+    .logo-block {}
+    .logo-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      color: var(--red);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .logo-title {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+    .logo-title span { color: var(--red2); }
+    .logo-sub {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      color: var(--text2);
+      margin-top: 0.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-regs {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.6rem 1.2rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-regs:hover { background: var(--gold); color: var(--bg); }
+    .btn-regs svg { flex-shrink: 0; }
+
+    /* ── Hero band ── */
+    .hero {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2rem;
+      position: relative; z-index: 5;
+    }
+    .hero-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 3px 1fr;
+      gap: 0 1.5rem;
+    }
+    .hero-bar {
+      background: linear-gradient(180deg, var(--red) 0%, transparent 100%);
+    }
+    .hero-text h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.04em;
+    }
+    .hero-text p {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      color: var(--text2);
+      line-height: 1.9;
+    }
+    .hero-text p + p { margin-top: 0.5rem; }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      position: relative; z-index: 5;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    /* ── Section heads ── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--red);
+      letter-spacing: 0.2em;
+    }
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.06em;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border2) 0%, transparent 100%);
+    }
+
+    /* ── Form ── */
+    .form-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+    }
+
+    .form-notice {
+      background: rgba(192,57,43,0.1);
+      border-left: 3px solid var(--red);
+      padding: 0.8rem 1.2rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      color: var(--text2);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .form-field {
+      margin-bottom: 2rem;
+    }
+
+    .field-label {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 0.7rem;
+    }
+    .field-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--red2);
+      flex-shrink: 0;
+    }
+    .field-text {
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+    .field-optional {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text3);
+      letter-spacing: 0.1em;
+    }
+
+    .field-hint {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--text3);
+      margin-bottom: 0.7rem;
+      padding-left: 1.4rem;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      padding: 0.7rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 2px rgba(192,57,43,0.15);
+    }
+    textarea { resize: vertical; min-height: 90px; line-height: 1.7; }
+
+    .address-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+    @media (max-width: 540px) { .address-row { grid-template-columns: 1fr; } }
+
+    /* Checkboxes */
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+    @media (max-width: 540px) { .checkbox-grid { grid-template-columns: 1fr; } }
+
+    .checkbox-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .checkbox-item:hover { border-color: var(--border2); }
+    .checkbox-item input[type="checkbox"] { display: none; }
+    .checkbox-item.checked {
+      border-color: var(--red);
+      background: rgba(192,57,43,0.08);
+    }
+    .checkbox-marker {
+      width: 16px; height: 16px;
+      border: 1px solid var(--border2);
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .checkbox-item.checked .checkbox-marker {
+      background: var(--red);
+      border-color: var(--red);
+    }
+    .checkbox-marker svg { display: none; }
+    .checkbox-item.checked .checkbox-marker svg { display: block; }
+    .checkbox-label {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .checkbox-label em {
+      display: block;
+      font-style: normal;
+      font-size: 0.72rem;
+      color: var(--text3);
+      margin-top: 0.15rem;
+    }
+
+    /* Radio */
+    .radio-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .radio-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      user-select: none;
+    }
+    .radio-item:hover { border-color: var(--border2); }
+    .radio-item input[type="radio"] { display: none; }
+    .radio-item.selected { border-color: var(--red); background: rgba(192,57,43,0.08); }
+    .radio-dot {
+      width: 16px; height: 16px;
+      border: 1px solid var(--border2);
+      border-radius: 50%;
+      flex-shrink: 0; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.15s;
+    }
+    .radio-item.selected .radio-dot { border-color: var(--red); }
+    .radio-dot::after {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .radio-item.selected .radio-dot::after { opacity: 1; }
+    .radio-label {
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* hCaptcha wrap */
+    .captcha-wrap {
+      margin: 1.5rem 0;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    /* Submit button */
+    .btn-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      background: var(--red);
+      border: none;
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      padding: 0.95rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover { background: var(--red2); }
+    .btn-submit:active { transform: scale(0.99); }
+    .btn-submit:disabled { background: var(--text3); cursor: not-allowed; }
+
+    /* Status messages */
+    .status-msg {
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      font-family: var(--sans);
+      font-size: 0.83rem;
+      display: none;
+    }
+    .status-msg.success { background: rgba(39,174,96,0.12); border-left: 3px solid #27ae60; color: #4fc87a; display: block; }
+    .status-msg.error   { background: rgba(192,57,43,0.12); border-left: 3px solid var(--red); color: var(--red2); display: block; }
+
+    /* ── Submissions section ── */
+    .submissions-section {}
+
+    .submissions-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .sub-count {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text3);
+      letter-spacing: 0.1em;
+    }
+    .sub-count span { color: var(--gold); }
+
+    .btn-refresh {
+      background: transparent;
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-refresh:hover { border-color: var(--text2); color: var(--white); }
+
+    /* Submission cards */
+    .submission-list { display: flex; flex-direction: column; gap: 1px; }
+
+    .submission-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid transparent;
+      transition: border-left-color 0.2s;
+      overflow: hidden;
+    }
+    .submission-card:hover { border-left-color: var(--red); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.4rem;
+      cursor: pointer;
+      gap: 1rem;
+      user-select: none;
+    }
+    .card-meta { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+    .card-id {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+    }
+    .card-school {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+    .card-date {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text3);
+    }
+    .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .tag {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--border2);
+      color: var(--text3);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .tag.highlight { border-color: var(--red); color: var(--red2); }
+
+    .card-toggle {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text3);
+      white-space: nowrap;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .card-header:hover .card-toggle { color: var(--text); }
+
+    .card-body {
+      display: none;
+      padding: 0 1.4rem 1.4rem;
+      border-top: 1px solid var(--border);
+    }
+    .card-body.open { display: block; }
+
+    .card-field {
+      margin-top: 1rem;
+    }
+    .card-field-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text3);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.25rem;
+    }
+    .card-field-value {
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .card-field-value.mono { font-family: var(--mono); font-size: 0.8rem; }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      border: 1px dashed var(--border2);
+    }
+    .empty-state-icon { font-size: 2rem; margin-bottom: 0.8rem; opacity: 0.3; }
+    .empty-state p {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      color: var(--text3);
+    }
+
+    /* Loading state */
+    .loading-bar {
+      display: none;
+      height: 2px;
+      background: linear-gradient(90deg, var(--bg2) 0%, var(--red) 50%, var(--bg2) 100%);
+      background-size: 200%;
+      animation: loading-sweep 1.2s infinite;
+      margin-bottom: 1.5rem;
+    }
+    .loading-bar.active { display: block; }
+    @keyframes loading-sweep {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    /* Expand button */
+    .expand-wrap {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .btn-expand {
+      background: transparent;
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      padding: 0.7rem 2.5rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-expand:hover { border-color: var(--text2); color: var(--white); background: rgba(255,255,255,0.03); }
+    .btn-expand.hidden { display: none; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      position: relative; z-index: 5;
+    }
+    footer p {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+      line-height: 2;
+    }
+    footer a { color: var(--text3); text-decoration: underline; }
+
+    /* ── Utilities ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border2), transparent);
+      margin: 1rem 0;
+    }
+
+    @media (max-width: 640px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      .logo-title { font-size: 1.5rem; }
+      .form-card { padding: 1.5rem; }
+      main { padding: 2rem 1rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-strip">本站为民间互助项目 · 记录违规补课 · 共同守护学生权益</div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-block">
+      <span class="logo-eyebrow">EDULEADER · 教育守望</span>
+      <div class="logo-title">中学违规补课<span>情况记录</span></div>
+      <div class="logo-sub">为延长存活时间，请把入口站www.webfg.dns.army套上<a href="https://pb.raring.co/">→即焚链接</a>，设置密码和期限再公开传播！</div>
+    </div>
+    <a href="regulations.html" class="btn-regs">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14,2 14,8 20,8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+      查看规章制度
+    </a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-bar"></div>
+    <div class="hero-text">
+      <h2>关于本项目</h2>
+      <p>本站收集中学阶段（初中、高中）违规补课及其他行为的第一手情况，所有匿名投稿经人机验证后直接公开展示，不经过任何中间服务器。数据托管于 GitHub，任何人均可查阅原始记录。</p>
+      <p>我们是一个互助项目。如果本站的记录帮助了您，请也帮助其他同学——用private bin链接转发、填写、举报，每一份投稿都是公开的凭证。</p>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ══════════ FORM SECTION ══════════ -->
+  <section>
+    <div class="section-head">
+      <span class="section-num">SECTION — 01</span>
+      <span class="section-title">提交情况投稿</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-notice">
+        ⚠ 请确保填写内容属实。虚假投稿不利于同学们维权，也会损害本项目公信力。填写完成后需通过人机验证方可提交。所有投稿将作为 GitHub Issue 公开存储，提交即代表同意公开此内容。
+      </div>
+
+      <form id="reportForm" novalidate>
+
+        <!-- Q1 地址 -->
+        <div class="form-field">
+          <div class="field-label">
+            <span class="field-num">Q1</span>
+            <span class="field-text">您所在的学校地址</span>
+          </div>
+          <div class="field-hint">请尽量填写完整，有助于其他同学核实</div>
+          <div class="address-row">
+            <input type="text" id="province" name="province" placeholder="省份（如：广东省）" />
+            <input type="text" id="city" name="city" placeholder="市 / 区（如：广州市天河区）" />
+          </div>
+          <div style="margin-top: 0.8rem;">
+            <input type="text" id="school" name="school" placeholder="学校全名（如：×× 中学）" />
+          </div>
+        </div>
+
+        <!-- Q2 违规情况 -->
+        <div class="form-field">
+          <div class="field-label">
+            <span class="field-num">Q2</span>
+            <span class="field-text">学校违规情况（可多选）</span>
+          </div>
+          <div class="checkbox-grid" id="violations">
+            <label class="checkbox-item" data-value="寒暑假违规补课">
+              <input type="checkbox" value="寒暑假违规补课" />
+              <div class="checkbox-marker">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                  <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="checkbox-label">寒暑假违规补课<em>法定假期期间强制或变相补课</em></span>
+            </label>
+            <label class="checkbox-item" data-value="占用周末">
+              <input type="checkbox" value="占用周末" />
+              <div class="checkbox-marker">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                  <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="checkbox-label">占用周末<em>周六或周日安排补课/考试</em></span>
+            </label>
+            <label class="checkbox-item" data-value="占用法定节假日">
+              <input type="checkbox" value="占用法定节假日" />
+              <div class="checkbox-marker">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                  <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="checkbox-label">占用法定节假日<em>五一、国庆等法定假日不休</em></span>
+            </label>
+            <label class="checkbox-item" data-value="晚自习考试或上课">
+              <input type="checkbox" value="晚自习考试或上课" />
+              <div class="checkbox-marker">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                  <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="checkbox-label">晚自习考试 / 上课<em>晚自习时间进行考试或授新课</em></span>
+            </label>
+            <label class="checkbox-item" data-value="作息安排违规">
+              <input type="checkbox" value="作息安排违规" />
+              <div class="checkbox-marker">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                  <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="checkbox-label">作息安排违规<em>起床/就寝时间不符合规定</em></span>
+            </label>
+            <label class="checkbox-item" data-value="重大违规违法事件">
+              <input type="checkbox" value="重大违规违法事件" />
+              <div class="checkbox-marker">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                  <path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="checkbox-label">重大违规 / 违法事件<em>体罚、强制费用、人身安全等</em></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Q3 具体说明 -->
+        <div class="form-field">
+          <div class="field-label">
+            <span class="field-num">Q3</span>
+            <span class="field-text">具体情况说明</span>
+          </div>
+          <div class="field-hint">请描述违规细节，如：是否以"自愿申请"名义要求家长签字？是否收取费用？频率如何？</div>
+          <textarea id="detail" name="detail" placeholder="请尽量详细描述，例如补课时间安排、是否有书面通知、是否需缴费等……"></textarea>
+        </div>
+
+        <!-- Q4 举报电话 -->
+        <div class="form-field">
+          <div class="field-label">
+            <span class="field-num">Q4</span>
+            <span class="field-text">互助举报电话推荐</span>
+            <span class="field-optional">（选填）</span>
+          </div>
+          <div class="field-hint">可填写当地教育局投诉电话、12345 政务热线分机等，方便其他同学参考</div>
+          <input type="text" id="hotline" name="hotline" placeholder="例：广州市教育局 020-88888888" />
+        </div>
+
+        <!-- Q5 诉求 -->
+        <div class="form-field">
+          <div class="field-label">
+            <span class="field-num">Q5</span>
+            <span class="field-text">简述您的诉求</span>
+          </div>
+          <textarea id="demand" name="demand" placeholder="例：希望学校遵守双减政策，不再安排假期补课；希望教育局介入调查……"></textarea>
+        </div>
+
+        <!-- Q6 人际关系 -->
+        <div class="form-field">
+          <div class="field-label">
+            <span class="field-num">Q6</span>
+            <span class="field-text">题外小调查：学校人际关系情况</span>
+          </div>
+          <div class="radio-group" id="social">
+            <label class="radio-item" data-value="班内外均能和同学经常交流">
+              <input type="radio" name="social" value="班内外均能和同学经常交流" />
+              <div class="radio-dot"></div>
+              <span class="radio-label">班内外均能和同学经常交流</span>
+            </label>
+            <label class="radio-item" data-value="班内小圈子">
+              <input type="radio" name="social" value="班内小圈子" />
+              <div class="radio-dot"></div>
+              <span class="radio-label">班内小圈子（主要与固定几人来往）</span>
+            </label>
+            <label class="radio-item" data-value="极少数朋友">
+              <input type="radio" name="social" value="极少数朋友" />
+              <div class="radio-dot"></div>
+              <span class="radio-label">极少数朋友（较为孤立，社交范围很小）</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Q7 互助 -->
+        <div class="form-field">
+          <div class="field-label">
+            <span class="field-num">Q7</span>
+            <span class="field-text">您帮助了本站中哪几篇投稿？</span>
+            <span class="field-optional">（选填）</span>
+          </div>
+          <div class="field-hint">
+            我们是互助项目，请您尽可能也帮助其他朋友们，为了大家共同出一份力！<br>
+            如果没有电话卡,也可以转发给您能联系到的其他人，谢谢配合！
+          </div>
+          <textarea id="helped" name="helped" style="min-height: 60px;" placeholder="例：#3、#7 两篇投稿，已帮助拨打举报电话"></textarea>
+        </div>
+
+        <!-- hCaptcha -->
+        <div class="divider"></div>
+        <div style="margin: 1.2rem 0 0.5rem; font-family: var(--sans); font-size: 0.8rem; color: var(--text3);">
+          请完成人机验证后提交：
+        </div>
+        <div class="captcha-wrap">
+          <div class="h-captcha" data-sitekey="0c54ed0a-27be-40a8-98fc-75e203564ab0" data-theme="dark"></div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          提交投稿
+        </button>
+
+        <div class="status-msg" id="statusMsg"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══════════ SUBMISSIONS SECTION ══════════ -->
+  <section class="submissions-section">
+    <div class="section-head">
+      <span class="section-num">SECTION — 02</span>
+      <span class="section-title">公开投稿记录</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="submissions-meta">
+      <div class="sub-count" id="subCount">共 <span>—</span> 篇投稿</div>
+      <button class="btn-refresh" id="refreshBtn" onclick="loadSubmissions()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-3.5"/>
+        </svg>
+        刷新
+      </button>
+    </div>
+
+    <div class="loading-bar" id="loadingBar"></div>
+    <div class="submission-list" id="submissionList"></div>
+    <div class="expand-wrap">
+      <button class="btn-expand hidden" id="expandBtn" onclick="expandAll()">
+        ▼ 点击展开全部投稿
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    本项目开源 · 只经过github和cloudflare服务器，无其余服务器记录数据<br>
+    本站不对内容真实性负法律责任 · 参与互助项目/仿照手机搭建镜像站，联系ueaf@mailfence.com
+  </p>
+</footer>
+
+<script>
+// ╔══════════════════════════════════════════════════╗
+// ║  配置区 - 修改 WORKER_API_URL 为你的 Worker 地址  ║
+// ╚══════════════════════════════════════════════════╝
+const CONFIG = {
+  // Cloudflare Worker API 地址（部署后替换）
+  WORKER_API_URL: 'https://withered-haze-6a81.sadnohikori-952.workers.dev',
+  
+  // hCaptcha Site Key
+  HCAPTCHA_SITE_KEY: '0c54ed0a-27be-40a8-98fc-75e203564ab0',
+
+  // GitHub 仓库信息（用于前端展示）
+  REPO_OWNER: 'hepsa2',
+  REPO_NAME:  'eduleader',
+  // 首页默认展示最新几篇
+  PREVIEW_COUNT: 20,
+};
+// ══════════════════════════════════════════════════
+
+// ── Checkbox interaction ──
+document.querySelectorAll('#violations .checkbox-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const cb = item.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    item.classList.toggle('checked', cb.checked);
+  });
+});
+
+// ── Radio interaction ──
+document.querySelectorAll('#social .radio-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('#social .radio-item').forEach(i => i.classList.remove('selected'));
+    const rb = item.querySelector('input[type="radio"]');
+    rb.checked = true;
+    item.classList.add('selected');
+  });
+});
+
+// ── Format issue body ──
+function buildIssueBody(data) {
+  return `## 投稿记录
+
+**提交时间：** ${new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}
+
+---
+
+### 📍 学校信息
+- **省份：** ${data.province || '未填写'}
+- **市/区：** ${data.city || '未填写'}
+- **学校名称：** ${data.school || '未填写'}
+
+---
+
+### ⚠️ 违规情况
+${data.violations.length > 0 ? data.violations.map(v => `- [x] ${v}`).join('\n') : '- 未选择'}
+
+---
+
+### 📝 具体情况说明
+${data.detail || '（未填写）'}
+
+---
+
+### ☎️ 互助举报电话推荐
+${data.hotline || '（未填写）'}
+
+---
+
+### 💬 投稿者诉求
+${data.demand || '（未填写）'}
+
+---
+
+### 👥 人际关系情况
+${data.social || '（未选择）'}
+
+---
+
+### 🤝 帮助了哪些投稿
+${data.helped || '（未填写）'}
+
+---
+
+*本投稿由访客通过 [教育守望](https://hepsa2.github.io/eduleader) 自愿提交，经 hCaptcha 人机验证。*
+`;
+}
+
+// ── Submit form ──
+document.getElementById('reportForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const captchaResp = document.querySelector('[name="h-captcha-response"]')?.value;
+  if (!captchaResp) {
+    showStatus('error', '请先完成人机验证！');
+    return;
+  }
+
+  const violations = [...document.querySelectorAll('#violations input:checked')].map(cb => cb.value);
+  const social = document.querySelector('#social input:checked')?.value || '';
+
+  const data = {
+    province:   document.getElementById('province').value.trim(),
+    city:       document.getElementById('city').value.trim(),
+    school:     document.getElementById('school').value.trim(),
+    violations,
+    detail:     document.getElementById('detail').value.trim(),
+    hotline:    document.getElementById('hotline').value.trim(),
+    demand:     document.getElementById('demand').value.trim(),
+    social,
+    helped:     document.getElementById('helped').value.trim(),
+  };
+
+  if (!data.province && !data.city && !data.school) {
+    showStatus('error', '请至少填写学校所在地或学校名称。');
+    return;
+  }
+
+  const titleSchool = data.school || '未知学校';
+  const titleLoc = [data.province, data.city].filter(Boolean).join(' ');
+  const issueTitle = `[投稿] ${titleLoc ? titleLoc + ' · ' : ''}${titleSchool}`;
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '提交中……';
+
+  try {
+    // ── 调用 Cloudflare Worker API ──
+    const res = await fetch(`${CONFIG.WORKER_API_URL}/submit`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: issueTitle,
+        body: buildIssueBody(data),
+        captchaToken: captchaResp,
+      }),
+    });
+
+    const result = await res.json();
+
+    if (res.ok && result.success) {
+      showStatus('success', `✅ 投稿成功！您的记录编号为 #${result.issueNumber}，已公开展示。感谢您的参与！`);
+      document.getElementById('reportForm').reset();
+      document.querySelectorAll('.checkbox-item').forEach(i => i.classList.remove('checked'));
+      document.querySelectorAll('.radio-item').forEach(i => i.classList.remove('selected'));
+      if (window.hcaptcha) hcaptcha.reset();
+      setTimeout(loadSubmissions, 1500);
+    } else {
+      showStatus('error', `提交失败：${result.error || '请稍后重试'}`);
+    }
+  } catch (err) {
+    showStatus('error', `网络错误：${err.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>提交投稿`;
+  }
+});
+
+function showStatus(type, msg) {
+  const el = document.getElementById('statusMsg');
+  el.className = `status-msg ${type}`;
+  el.textContent = msg;
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ── Parse issue body into structured fields ──
+function parseIssue(issue) {
+  const body = issue.body || '';
+
+  const extract = (label) => {
+    const re = new RegExp(`\\*\\*${label}：\\*\\*\\s*(.+?)(?=\\n|$)`);
+    const m = body.match(re);
+    return m ? m[1].trim() : '';
+  };
+
+  const extractBlock = (heading) => {
+    const re = new RegExp(`### [^\\n]*${heading}[^\\n]*\\n([\\s\\S]*?)(?=\\n---\\n|$)`);
+    const m = body.match(re);
+    return m ? m[1].trim() : '';
+  };
+
+  const province = extract('省份');
+  const city     = extract('市/区');
+  const school   = extract('学校名称');
+  const detail   = extractBlock('具体情况');
+  const hotline  = extractBlock('互助举报');
+  const demand   = extractBlock('投稿者诉求');
+  const social   = extractBlock('人际关系');
+  const helped   = extractBlock('帮助了哪些');
+
+  const violationsBlock = extractBlock('违规情况');
+  const violations = (violationsBlock.match(/- \[x\] (.+)/g) || [])
+    .map(v => v.replace('- [x] ', '').trim());
+
+  const location = [province, city, school].filter(Boolean).join(' · ');
+
+  return { province, city, school, location, violations, detail, hotline, demand, social, helped };
+}
+
+// ── Build submission card HTML ──
+function buildCard(issue, idx) {
+  const parsed = parseIssue(issue);
+  const date = new Date(issue.created_at).toLocaleDateString('zh-CN');
+  const id = `#${issue.number}`;
+  const hasHighlight = parsed.violations.includes('重大违规违法事件');
+
+  const violationTags = parsed.violations.slice(0, 3).map(v =>
+    `<span class="tag ${hasHighlight ? 'highlight' : ''}">${v}</span>`
+  ).join('');
+  const moreViolations = parsed.violations.length > 3
+    ? `<span class="tag">+${parsed.violations.length - 3}</span>` : '';
+
+  const fieldBlock = (label, value) => value
+    ? `<div class="card-field">
+        <div class="card-field-label">${label}</div>
+        <div class="card-field-value">${value.replace(/\n/g, '<br>')}</div>
+       </div>` : '';
+
+  return `
+<div class="submission-card" id="card-${issue.number}">
+  <div class="card-header" onclick="toggleCard(${issue.number})">
+    <div class="card-meta">
+      <span class="card-id">${id}</span>
+      <span class="card-school">${parsed.location || issue.title}</span>
+      <span class="card-date">${date}</span>
+      <div class="card-tags">${violationTags}${moreViolations}</div>
+    </div>
+    <span class="card-toggle" id="toggle-${issue.number}">展开 ▾</span>
+  </div>
+  <div class="card-body" id="body-${issue.number}">
+    ${fieldBlock('⚠️ 违规情况', parsed.violations.join('　'))}
+    ${fieldBlock('📝 具体说明', parsed.detail)}
+    ${fieldBlock('☎️ 举报电话推荐', parsed.hotline)}
+    ${fieldBlock('💬 诉求', parsed.demand)}
+    ${fieldBlock('👥 人际关系', parsed.social)}
+    ${fieldBlock('🤝 帮助了哪些投稿', parsed.helped)}
+    <div class="card-field">
+      <div class="card-field-label">🔗 原始记录</div>
+      <div class="card-field-value">
+        <a href="${issue.html_url}" target="_blank" style="color: var(--text3); font-family: var(--mono); font-size: 0.75rem;">${issue.html_url}</a>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+function toggleCard(num) {
+  const body = document.getElementById(`body-${num}`);
+  const toggle = document.getElementById(`toggle-${num}`);
+  const isOpen = body.classList.toggle('open');
+  toggle.textContent = isOpen ? '收起 ▴' : '展开 ▾';
+}
+
+// ── Load submissions ──
+let allIssues = [];
+
+async function loadSubmissions() {
+  const list = document.getElementById('submissionList');
+  const loadingBar = document.getElementById('loadingBar');
+  const expandBtn = document.getElementById('expandBtn');
+  const subCount = document.getElementById('subCount');
+
+  loadingBar.classList.add('active');
+  list.innerHTML = '';
+  expandBtn.classList.add('hidden');
+
+  try {
+    // ── 调用 Worker API 获取投稿列表 ──
+    const res = await fetch(`${CONFIG.WORKER_API_URL}/issues`);
+    
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const result = await res.json();
+    
+    if (!result.success) throw new Error(result.error || '加载失败');
+    
+    allIssues = result.issues;
+
+    subCount.innerHTML = `共 <span>${allIssues.length}</span> 篇投稿`;
+
+    if (allIssues.length === 0) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">📭</div>
+          <p>暂无投稿记录。成为第一个提交的人！</p>
+        </div>`;
+      return;
+    }
+
+    const preview = allIssues.slice(0, CONFIG.PREVIEW_COUNT);
+    list.innerHTML = preview.map((issue, idx) => buildCard(issue, idx)).join('');
+
+    if (allIssues.length > CONFIG.PREVIEW_COUNT) {
+      expandBtn.classList.remove('hidden');
+      expandBtn.textContent = `▼ 点击展开全部投稿（共 ${allIssues.length} 篇）`;
+    }
+  } catch (err) {
+    list.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">⚠️</div>
+        <p>加载失败：${err.message}<br>请检查网络或稍后重试</p>
+      </div>`;
+  } finally {
+    loadingBar.classList.remove('active');
+  }
+}
+
+function expandAll() {
+  const list = document.getElementById('submissionList');
+  const expandBtn = document.getElementById('expandBtn');
+  const remaining = allIssues.slice(CONFIG.PREVIEW_COUNT);
+  list.innerHTML += remaining.map((issue, idx) => buildCard(issue, idx + CONFIG.PREVIEW_COUNT)).join('');
+  expandBtn.classList.add('hidden');
+}
+
+// Initial load
+loadSubmissions();
+</script>
+</body>
+  </html>
